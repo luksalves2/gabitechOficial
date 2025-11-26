@@ -61,9 +61,13 @@ class _MainSolicitacoesWidgetState extends State<MainSolicitacoesWidget>
 
         safeSetState(() {
           _model.dropDownCategoriaAnaliseValueController?.reset();
+          _model.dropDownCategoriaAnaliseValue = null;
           _model.dropDownConcluidoValueController?.reset();
+          _model.dropDownConcluidoValue = null;
           _model.dropDownAndamentoValueController?.reset();
+          _model.dropDownAndamentoValue = null;
           _model.dropDownAtrasoValueController?.reset();
+          _model.dropDownAtrasoValue = null;
         });
         FFAppState().solCategoria = 'not.is.null';
         safeSetState(() {});

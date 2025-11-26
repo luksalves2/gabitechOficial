@@ -5047,9 +5047,13 @@ class _MainMessagesbkpOldWidgetState extends State<MainMessagesbkpOldWidget>
                                                     _model
                                                         .dropDownGeneroValueController
                                                         ?.reset();
+                                                    _model.dropDownGeneroValue =
+                                                        null;
                                                     _model
                                                         .dropDownUserValueController
                                                         ?.reset();
+                                                    _model.dropDownUserValue =
+                                                        null;
                                                   });
                                                   safeSetState(() {
                                                     _model.textNomeCidadaoTextController
