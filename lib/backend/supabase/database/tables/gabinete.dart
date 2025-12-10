@@ -14,30 +14,41 @@ class GabineteRow extends SupabaseDataRow {
   @override
   SupabaseTable get table => GabineteTable();
 
-  String get gabineteId => getField<String>('gabinete_id')!;
-  set gabineteId(String value) => setField<String>('gabinete_id', value);
+  int get id => getField<int>('id')!;
+  set id(int value) => setField<int>('id', value);
 
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  String? get nomePolitico => getField<String>('nome_politico');
-  set nomePolitico(String? value) => setField<String>('nome_politico', value);
+  String? get usuario => getField<String>('usuario');
+  set usuario(String? value) => setField<String>('usuario', value);
+
+  String? get nome => getField<String>('nome');
+  set nome(String? value) => setField<String>('nome', value);
 
   String? get descricao => getField<String>('descricao');
   set descricao(String? value) => setField<String>('descricao', value);
 
+  String? get telefone => getField<String>('telefone');
+  set telefone(String? value) => setField<String>('telefone', value);
+
   String? get cidade => getField<String>('cidade');
   set cidade(String? value) => setField<String>('cidade', value);
 
-  String? get uf => getField<String>('uf');
-  set uf(String? value) => setField<String>('uf', value);
+  String? get estado => getField<String>('estado');
+  set estado(String? value) => setField<String>('estado', value);
 
-  String? get phone => getField<String>('phone');
-  set phone(String? value) => setField<String>('phone', value);
+  String? get instancia => getField<String>('instancia');
+  set instancia(String? value) => setField<String>('instancia', value);
 
-  String? get zapiInstance => getField<String>('zapi_instance');
-  set zapiInstance(String? value) => setField<String>('zapi_instance', value);
+  String? get token => getField<String>('token');
+  set token(String? value) => setField<String>('token', value);
 
-  String? get zapiToken => getField<String>('zapi_token');
-  set zapiToken(String? value) => setField<String>('zapi_token', value);
+  List<String> get acessores => getListField<String>('acessores');
+  set acessores(List<String>? value) =>
+      setListField<String>('acessores', value);
+
+  String? get prazoSolicitacoes => getField<String>('prazo_solicitacoes');
+  set prazoSolicitacoes(String? value) =>
+      setField<String>('prazo_solicitacoes', value);
 }

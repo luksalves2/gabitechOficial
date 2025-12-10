@@ -192,3 +192,253 @@ DateTime fncsomaSLA(int diasSLA) {
   // // CRIE UMA FUNÇÃO QUE RECEBE NUMERO SOME A DATA CORRENTE E DEVOLVE A DATA
   return DateTime.now().add(Duration(days: diasSLA));
 }
+
+String removerCaracteres(String text) {
+// remove "-", spaces, ".", "/"
+  return text
+      .replaceAll('-', '')
+      .replaceAll(' ', '')
+      .replaceAll('.', '')
+      .replaceAll('/', '');
+}
+
+String ajustarData(String data) {
+  final millis = int.tryParse(data);
+  if (millis == null) return "Data inválida";
+
+  final date =
+      DateTime.fromMillisecondsSinceEpoch(millis, isUtc: true).toLocal();
+  final now = DateTime.now();
+
+  final today = DateTime(now.year, now.month, now.day);
+  final yesterday = today.subtract(const Duration(days: 1));
+  final dateOnly = DateTime(date.year, date.month, date.day);
+
+  if (dateOnly == today) {
+    // Hoje → mostra hora
+    return DateFormat('HH:mm').format(date);
+  } else if (dateOnly == yesterday) {
+    // Ontem
+    return "ontem";
+  } else {
+    // Antigo → mostra data completa
+    return DateFormat('dd/MM/yyyy').format(date);
+  }
+}
+
+String ajustarHora(String data) {
+  final millis = int.tryParse(data);
+  if (millis == null) return "Data inválida";
+
+  final date =
+      DateTime.fromMillisecondsSinceEpoch(millis, isUtc: true).toLocal();
+
+  final h = date.hour.toString().padLeft(2, '0');
+  final m = date.minute.toString().padLeft(2, '0');
+  return "$h:$m";
+}
+
+String quebrarTexto(String texto) {
+  String resultado = '';
+
+  // Lista de palavras
+  List<String> palavras = texto.split(' ');
+
+  // Linha atual
+  String linhaAtual = '';
+
+  // Itera por todas as palavras
+  for (String palavra in palavras) {
+    // Verifica se adicionar a palavra à linha atual ultrapassaria 25 caracteres
+    if ((linhaAtual + palavra).length > 25) {
+      // Se ultrapassar, adiciona a linha ao resultado e começa uma nova linha
+      resultado += linhaAtual.trim() + '\n'; // Remove o espaço extra no final
+      linhaAtual = ''; // Reseta a linha atual
+    }
+
+    // Adiciona a palavra à linha atual
+    linhaAtual += palavra + ' ';
+  }
+
+  // Adiciona a última linha, se houver algo restante
+  if (linhaAtual.isNotEmpty) {
+    resultado += linhaAtual.trim(); // Remove o espaço extra no final
+  }
+
+  return resultado;
+}
+
+String converterCorString(Color cor) {
+  return '#'
+          '${cor.red.toRadixString(16).padLeft(2, '0')}'
+          '${cor.green.toRadixString(16).padLeft(2, '0')}'
+          '${cor.blue.toRadixString(16).padLeft(2, '0')}'
+      .toUpperCase();
+}
+
+String formatarTelefone(String telefone) {
+  // remove o sufixo do WhatsApp, se existir
+  String numero = telefone.split('@').first;
+
+  // remove tudo que não for número
+  numero = numero.replaceAll(RegExp(r'[^0-9]'), '');
+
+  // remove o código do país (55), se houver
+  if (numero.startsWith('55') && numero.length >= 12) {
+    numero = numero.substring(2);
+  }
+
+  // agora esperamos algo como: DDD + 9 + 8 dígitos
+  // ex: 1195133722 → (11) 9 5133-722
+  if (numero.length == 11) {
+    final ddd = numero.substring(0, 2);
+    final nove = numero.substring(2, 3);
+    final parte1 = numero.substring(3, 7);
+    final parte2 = numero.substring(7, 11);
+
+    return '($ddd) $nove $parte1-$parte2';
+  }
+
+  // fallback (caso venha algo fora do padrão)
+  return numero;
+}
+
+String iniciaisNome(String nome) {
+  if (nome.trim().isEmpty) return '';
+
+  final partes =
+      nome.trim().split(' ').where((p) => p.trim().isNotEmpty).toList();
+
+  if (partes.length == 1) {
+    return partes.first.substring(0, 1).toUpperCase();
+  }
+
+  final primeira = partes.first.substring(0, 1);
+  final ultima = partes.last.substring(0, 1);
+
+  return (primeira + ultima).toUpperCase();
+}
+
+int calcularListaInteger(List<int> itens) {
+  int total = 0;
+
+  for (final item in itens) {
+    total += item;
+  }
+
+  return total;
+}
+
+int minutosCampanha(
+  String data,
+  String horario,
+) {
+  try {
+    // Quebra da data
+    final partesData = data.split('/');
+    final dia = int.parse(partesData[0]);
+    final mes = int.parse(partesData[1]);
+    final ano = int.parse(partesData[2]);
+
+    // Quebra do horário
+    final partesHora = horario.split(':');
+    final hora = int.parse(partesHora[0]);
+    final minuto = int.parse(partesHora[1]);
+
+    // Data/hora da campanha
+    final dataCampanha = DateTime(ano, mes, dia, hora, minuto);
+
+    // Agora
+    final agora = DateTime.now();
+
+    final diferenca = dataCampanha.difference(agora).inMinutes;
+
+    // Se já passou, retorna 0
+    if (diferenca < 0) {
+      return 0;
+    }
+
+    return diferenca;
+  } catch (e) {
+    // Em caso de erro de parse
+    return 0;
+  }
+}
+
+String identificarArquivo(String arquivo) {
+  if (arquivo.trim().isEmpty) return 'Arquivo';
+
+  // Remove query string, se existir
+  String clean = arquivo.split('?').first.toLowerCase();
+
+  // Pega só o nome do arquivo
+  String nome = clean.split('/').last;
+
+  // Extensão
+  String extensao = '';
+  if (nome.contains('.')) {
+    extensao = nome.split('.').last;
+  }
+
+  if (['pdf'].contains(extensao)) {
+    return 'PDF';
+  }
+
+  if (['jpg', 'jpeg', 'png', 'gif', 'webp'].contains(extensao)) {
+    return 'Imagem';
+  }
+
+  if (['mp4', 'mov', 'avi', 'mkv', 'webm'].contains(extensao)) {
+    return 'Vídeo';
+  }
+
+  if (['mp3', 'wav', 'aac', 'ogg'].contains(extensao)) {
+    return 'Áudio';
+  }
+
+  if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt'].contains(extensao)) {
+    return 'Documento';
+  }
+
+  return 'Arquivo';
+}
+
+String prazoSolicitacao(
+  String prazo,
+  DateTime dataAtual,
+) {
+  // Converte o prazo (dias) para int
+  final int dias = int.tryParse(prazo) ?? 0;
+
+  // Soma os dias à data atual
+  final DateTime dataFinal = dataAtual.add(Duration(days: dias));
+
+  // Formata para DD/MM/YYYY
+  final String dia = dataFinal.day.toString().padLeft(2, '0');
+  final String mes = dataFinal.month.toString().padLeft(2, '0');
+  final String ano = dataFinal.year.toString();
+
+  return '$dia/$mes/$ano';
+}
+
+List<LatLng> listaLatLng(
+  List<String> latitude,
+  List<String> longitude,
+) {
+  final List<LatLng> resultado = [];
+
+  // Garante que não estoure índice
+  final int tamanho =
+      latitude.length < longitude.length ? latitude.length : longitude.length;
+
+  for (int i = 0; i < tamanho; i++) {
+    final double? lat = double.tryParse(latitude[i]);
+    final double? lng = double.tryParse(longitude[i]);
+
+    if (lat != null && lng != null) {
+      resultado.add(LatLng(lat, lng));
+    }
+  }
+
+  return resultado;
+}

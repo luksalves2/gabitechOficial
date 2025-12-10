@@ -122,13 +122,13 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF2A9ADF);
-  late Color secondary = const Color(0xFF00C8C9);
+  late Color primary = const Color(0xFF2563EB);
+  late Color secondary = const Color(0xFF3B82F6);
   late Color tertiary = const Color(0xFF0036F3);
   late Color alternate = const Color(0xFFE5E7EB);
   late Color primaryText = const Color(0xFF15161E);
   late Color secondaryText = const Color(0xFF606A85);
-  late Color primaryBackground = const Color(0xFFF1F4F8);
+  late Color primaryBackground = const Color(0xFFF9FDFF);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
   late Color accent1 = const Color(0x4B2A9ADF);
   late Color accent2 = const Color(0x4C39D2C0);
@@ -197,107 +197,107 @@ class ThemeTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get displayLargeFamily => 'Outfit';
+  String get displayLargeFamily => 'Montserrat';
   bool get displayLargeIsCustom => false;
-  TextStyle get displayLarge => GoogleFonts.outfit(
+  TextStyle get displayLarge => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 48.0,
       );
-  String get displayMediumFamily => 'Outfit';
+  String get displayMediumFamily => 'Montserrat';
   bool get displayMediumIsCustom => false;
-  TextStyle get displayMedium => GoogleFonts.outfit(
+  TextStyle get displayMedium => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 36.0,
       );
-  String get displaySmallFamily => 'Outfit';
+  String get displaySmallFamily => 'Montserrat';
   bool get displaySmallIsCustom => false;
-  TextStyle get displaySmall => GoogleFonts.outfit(
+  TextStyle get displaySmall => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 32.0,
       );
-  String get headlineLargeFamily => 'Outfit';
+  String get headlineLargeFamily => 'Montserrat';
   bool get headlineLargeIsCustom => false;
-  TextStyle get headlineLarge => GoogleFonts.outfit(
+  TextStyle get headlineLarge => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 32.0,
       );
-  String get headlineMediumFamily => 'Outfit';
+  String get headlineMediumFamily => 'Montserrat';
   bool get headlineMediumIsCustom => false;
-  TextStyle get headlineMedium => GoogleFonts.outfit(
+  TextStyle get headlineMedium => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 24.0,
       );
-  String get headlineSmallFamily => 'Outfit';
+  String get headlineSmallFamily => 'Montserrat';
   bool get headlineSmallIsCustom => false;
-  TextStyle get headlineSmall => GoogleFonts.outfit(
+  TextStyle get headlineSmall => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22.0,
       );
-  String get titleLargeFamily => 'Plus Jakarta Sans';
+  String get titleLargeFamily => 'Montserrat';
   bool get titleLargeIsCustom => false;
-  TextStyle get titleLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get titleLarge => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 18.0,
       );
-  String get titleMediumFamily => 'Plus Jakarta Sans';
+  String get titleMediumFamily => 'Montserrat';
   bool get titleMediumIsCustom => false;
-  TextStyle get titleMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get titleMedium => GoogleFonts.montserrat(
         color: theme.info,
         fontWeight: FontWeight.w500,
         fontSize: 18.0,
       );
-  String get titleSmallFamily => 'Plus Jakarta Sans';
+  String get titleSmallFamily => 'Montserrat';
   bool get titleSmallIsCustom => false;
-  TextStyle get titleSmall => GoogleFonts.plusJakartaSans(
+  TextStyle get titleSmall => GoogleFonts.montserrat(
         color: theme.info,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get labelLargeFamily => 'Plus Jakarta Sans';
+  String get labelLargeFamily => 'Montserrat';
   bool get labelLargeIsCustom => false;
-  TextStyle get labelLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get labelLarge => GoogleFonts.montserrat(
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get labelMediumFamily => 'Plus Jakarta Sans';
+  String get labelMediumFamily => 'Montserrat';
   bool get labelMediumIsCustom => false;
-  TextStyle get labelMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get labelMedium => GoogleFonts.montserrat(
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get labelSmallFamily => 'Plus Jakarta Sans';
+  String get labelSmallFamily => 'Montserrat';
   bool get labelSmallIsCustom => false;
-  TextStyle get labelSmall => GoogleFonts.plusJakartaSans(
+  TextStyle get labelSmall => GoogleFonts.montserrat(
         color: theme.secondaryText,
         fontWeight: FontWeight.w500,
         fontSize: 12.0,
       );
-  String get bodyLargeFamily => 'Plus Jakarta Sans';
+  String get bodyLargeFamily => 'Montserrat';
   bool get bodyLargeIsCustom => false;
-  TextStyle get bodyLarge => GoogleFonts.plusJakartaSans(
+  TextStyle get bodyLarge => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 16.0,
       );
-  String get bodyMediumFamily => 'Plus Jakarta Sans';
+  String get bodyMediumFamily => 'Montserrat';
   bool get bodyMediumIsCustom => false;
-  TextStyle get bodyMedium => GoogleFonts.plusJakartaSans(
+  TextStyle get bodyMedium => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 14.0,
       );
-  String get bodySmallFamily => 'Plus Jakarta Sans';
+  String get bodySmallFamily => 'Montserrat';
   bool get bodySmallIsCustom => false;
-  TextStyle get bodySmall => GoogleFonts.plusJakartaSans(
+  TextStyle get bodySmall => GoogleFonts.montserrat(
         color: theme.primaryText,
         fontWeight: FontWeight.w500,
         fontSize: 12.0,

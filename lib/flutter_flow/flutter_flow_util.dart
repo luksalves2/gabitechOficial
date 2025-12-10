@@ -6,20 +6,16 @@ import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:from_css_color/from_css_color.dart';
 import 'dart:math' show pow, pi, sin;
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:json_path/json_path.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:file_saver/file_saver.dart';
-import 'package:http/http.dart' as http;
-import 'package:mime/mime.dart' as mime;
-import 'uploaded_file.dart';
 
 import '../main.dart';
 
 import 'lat_lng.dart';
 
-export 'keep_alive_wrapper.dart';
 export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';
@@ -209,84 +205,6 @@ Future launchURL(String url) async {
     await launchUrl(uri);
   } catch (e) {
     throw 'Could not launch $uri: $e';
-  }
-}
-
-String? getExtensionFromFilename(String filename) {
-  return filename.contains('.') ? filename.split('.').last : null;
-}
-
-/*
- * Downloads/Saves a file from a URL or file bytes. If the filename contains an
- * extension (e.g. 'file.pdf'), the extension will be used to determine the
- * file type, otherwise the response header (url case) or file header bytes will
- * be used to infer the file's type. 
- */
-Future downloadFile({
-  required String filename,
-  String? url,
-  FFUploadedFile? uploadedFile,
-}) async {
-  var bytes = uploadedFile?.bytes;
-  var extension = getExtensionFromFilename(filename) ??
-      getExtensionFromFilename(uploadedFile?.name ?? '');
-
-  if (url == null && bytes == null) {
-    throw 'No file/url to download';
-  }
-  if (url != null && bytes != null) {
-    throw 'Only one of url or bytes can be provided';
-  }
-
-  String? mimeType;
-
-  // First, check if the extension is specified in the filename to avoid needing
-  // to scan the file to determine the mime type and extension
-  mimeType = mime.lookupMimeType(filename) ??
-      mime.lookupMimeType(uploadedFile?.name ?? '');
-
-  // If a URL is provided, download the file and determine the mime type from
-  // the response headers.
-  if (url != null && url.isNotEmpty) {
-    final response = await http.get(Uri.parse(url));
-    bytes = response.bodyBytes;
-    mimeType ??= response.headers['content-type'];
-  }
-
-  // If a file is provided and the filename does not have an extension, scan the
-  // file header bytes to determine the mime type and extension.
-  if (bytes != null && bytes.isNotEmpty) {
-    // Grab the first 32 bytes of the file to determine the mime type
-    if (mimeType == null) {
-      final headerBytes = bytes.take(32).toList();
-      mimeType ??= mime.lookupMimeType(filename, headerBytes: headerBytes);
-    }
-  }
-
-  MimeType mimeTypeObj =
-      MimeType.values.firstWhereOrNull((e) => e.type == mimeType) ??
-          MimeType.other;
-
-  // Extract base filename without extension for consistent handling
-  final baseFilename = filename.contains('.')
-      ? filename.substring(0, filename.lastIndexOf('.'))
-      : filename;
-  final fileExtension = extension ?? mime.extensionFromMime(mimeType ?? '');
-
-  if (kIsWeb) {
-    await FileSaver.instance.saveFile(
-      bytes: bytes,
-      name: baseFilename,
-      ext: fileExtension,
-      mimeType: mimeTypeObj,
-    );
-  } else {
-    await FileSaver.instance.saveAs(
-      bytes: bytes,
-      name: baseFilename,
-      ext: fileExtension,
-      mimeType: mimeTypeObj,
-    );
   }
 }
 
@@ -483,6 +401,48 @@ const kTextValidatorEmailRegex =
     "^(?:[a-zA-Z0-9!#\$%&\'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#\$%&\'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\$";
 const kTextValidatorWebsiteRegex =
     r'(https?:\/\/)?(www\.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)|(https?:\/\/)?(www\.)?(?!ww)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,10}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)';
+
+LatLng? cachedUserLocation;
+Future<LatLng> getCurrentUserLocation(
+    {required LatLng defaultLocation, bool cached = false}) async {
+  if (cached && cachedUserLocation != null) {
+    return cachedUserLocation!;
+  }
+  return queryCurrentUserLocation().then((loc) {
+    if (loc != null) {
+      cachedUserLocation = loc;
+    }
+    return loc ?? defaultLocation;
+  }).onError((error, _) {
+    print("Error querying user location: $error");
+    return defaultLocation;
+  });
+}
+
+Future<LatLng?> queryCurrentUserLocation() async {
+  final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    return Future.error('Location services are disabled.');
+  }
+
+  var permission = await Geolocator.checkPermission();
+  if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permissions are denied');
+    }
+  }
+
+  if (permission == LocationPermission.deniedForever) {
+    return Future.error(
+        'Location permissions are permanently denied, we cannot request permissions.');
+  }
+
+  final position = await Geolocator.getCurrentPosition();
+  return position != null && position.latitude != 0 && position.longitude != 0
+      ? LatLng(position.latitude, position.longitude)
+      : null;
+}
 
 extension FFTextEditingControllerExt on TextEditingController? {
   String get text => this == null ? '' : this!.text;

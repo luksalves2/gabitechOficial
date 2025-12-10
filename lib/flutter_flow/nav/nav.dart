@@ -86,217 +86,87 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : AuthLoginWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : AuthLoginWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : LoginWidget(),
           routes: [
             FFRoute(
-              name: AuthLoginWidget.routeName,
-              path: AuthLoginWidget.routePath,
-              builder: (context, params) => AuthLoginWidget(),
+              name: LoginWidget.routeName,
+              path: LoginWidget.routePath,
+              builder: (context, params) => LoginWidget(),
             ),
             FFRoute(
-              name: ForgotPasswordWidget.routeName,
-              path: ForgotPasswordWidget.routePath,
-              builder: (context, params) => ForgotPasswordWidget(),
+              name: EsqueceuSenhaWidget.routeName,
+              path: EsqueceuSenhaWidget.routePath,
+              builder: (context, params) => EsqueceuSenhaWidget(),
             ),
             FFRoute(
-              name: AuthCreateWidget.routeName,
-              path: AuthCreateWidget.routePath,
-              builder: (context, params) => AuthCreateWidget(),
+              name: CriarContaWidget.routeName,
+              path: CriarContaWidget.routePath,
+              builder: (context, params) => CriarContaWidget(),
             ),
             FFRoute(
-              name: MainHomeWidget.routeName,
-              path: MainHomeWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_Home')
-                  : MainHomeWidget(),
+              name: AlterarSenhaWidget.routeName,
+              path: AlterarSenhaWidget.routePath,
+              builder: (context, params) => AlterarSenhaWidget(),
             ),
             FFRoute(
-              name: MainAniversariosWidget.routeName,
-              path: MainAniversariosWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_Aniversarios')
-                  : MainAniversariosWidget(),
+              name: HomeWidget.routeName,
+              path: HomeWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => HomeWidget(),
             ),
             FFRoute(
-              name: MainMessagesWidget.routeName,
-              path: MainMessagesWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_messages')
-                  : MainMessagesWidget(),
+              name: MensagensWidget.routeName,
+              path: MensagensWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => MensagensWidget(),
             ),
             FFRoute(
-              name: MainProfilePageWidget.routeName,
-              path: MainProfilePageWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_profilePage')
-                  : MainProfilePageWidget(),
+              name: SolicitacoesWidget.routeName,
+              path: SolicitacoesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => SolicitacoesWidget(),
             ),
             FFRoute(
-              name: UserDetailsWidget.routeName,
-              path: UserDetailsWidget.routePath,
-              builder: (context, params) => UserDetailsWidget(
-                showBack: params.getParam(
-                  'showBack',
-                  ParamType.bool,
-                ),
-              ),
+              name: PerfilWidget.routeName,
+              path: PerfilWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => PerfilWidget(),
             ),
             FFRoute(
-              name: EditProfileWidget.routeName,
-              path: EditProfileWidget.routePath,
-              builder: (context, params) => EditProfileWidget(
-                email: params.getParam(
-                  'email',
-                  ParamType.String,
-                ),
-                avatarUrl: params.getParam(
-                  'avatarUrl',
-                  ParamType.String,
-                ),
-                avararUrlImagemPatch: params.getParam(
-                  'avararUrlImagemPatch',
-                  ParamType.String,
-                ),
-              ),
+              name: AtividadesWidget.routeName,
+              path: AtividadesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => AtividadesWidget(),
             ),
             FFRoute(
-              name: ProjectDetailsHealthAiWidget.routeName,
-              path: ProjectDetailsHealthAiWidget.routePath,
-              builder: (context, params) => ProjectDetailsHealthAiWidget(),
+              name: CidadoesWidget.routeName,
+              path: CidadoesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => CidadoesWidget(),
             ),
             FFRoute(
-              name: SolicitDetailsDESATIVADOWidget.routeName,
-              path: SolicitDetailsDESATIVADOWidget.routePath,
-              builder: (context, params) => SolicitDetailsDESATIVADOWidget(
-                solidId: params.getParam(
-                  'solidId',
-                  ParamType.String,
-                ),
-              ),
+              name: AcessoresWidget.routeName,
+              path: AcessoresWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => AcessoresWidget(),
             ),
             FFRoute(
-              name: SearchPageWidget.routeName,
-              path: SearchPageWidget.routePath,
-              builder: (context, params) => SearchPageWidget(),
+              name: TransmissoesWidget.routeName,
+              path: TransmissoesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => TransmissoesWidget(),
             ),
             FFRoute(
-              name: MessagesDetailsWidget.routeName,
-              path: MessagesDetailsWidget.routePath,
-              builder: (context, params) => MessagesDetailsWidget(),
-            ),
-            FFRoute(
-              name: MainSolicitacoesWidget.routeName,
-              path: MainSolicitacoesWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_solicitacoes')
-                  : MainSolicitacoesWidget(),
-            ),
-            FFRoute(
-              name: MainGeolocalizacaoWidget.routeName,
-              path: MainGeolocalizacaoWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_Geolocalizacao')
-                  : MainGeolocalizacaoWidget(),
-            ),
-            FFRoute(
-              name: MainAtividadesWidget.routeName,
-              path: MainAtividadesWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_Atividades')
-                  : MainAtividadesWidget(),
-            ),
-            FFRoute(
-              name: MainCidadaosWidget.routeName,
-              path: MainCidadaosWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_Cidadaos')
-                  : MainCidadaosWidget(
-                      pageNumber: params.getParam(
-                        'pageNumber',
-                        ParamType.int,
-                      ),
-                      pageSize: params.getParam(
-                        'pageSize',
-                        ParamType.int,
-                      ),
-                    ),
-            ),
-            FFRoute(
-              name: SolicitacaoDetalhesWidget.routeName,
-              path: SolicitacaoDetalhesWidget.routePath,
-              builder: (context, params) => SolicitacaoDetalhesWidget(
-                solicitacaoId: params.getParam(
-                  'solicitacaoId',
-                  ParamType.String,
-                ),
-              ),
-            ),
-            FFRoute(
-              name: MainProfilePageAdminWidget.routeName,
-              path: MainProfilePageAdminWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'mainProfilePageAdmin')
-                  : MainProfilePageAdminWidget(),
-            ),
-            FFRoute(
-              name: MainProfilePageAdminProfileWidget.routeName,
-              path: MainProfilePageAdminProfileWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'mainProfilePageAdminProfile')
-                  : MainProfilePageAdminProfileWidget(),
-            ),
-            FFRoute(
-              name: MainAdminProfileWidget.routeName,
-              path: MainAdminProfileWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'mainAdminProfile')
-                  : MainAdminProfileWidget(),
-            ),
-            FFRoute(
-              name: AuthPasswordDefinidWidget.routeName,
-              path: AuthPasswordDefinidWidget.routePath,
-              builder: (context, params) => AuthPasswordDefinidWidget(),
-            ),
-            FFRoute(
-              name: MainTransmissoesWidget.routeName,
-              path: MainTransmissoesWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_transmissoes')
-                  : MainTransmissoesWidget(),
-            ),
-            FFRoute(
-              name: MainMessagesbkpOldWidget.routeName,
-              path: MainMessagesbkpOldWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_messagesbkp_old')
-                  : MainMessagesbkpOldWidget(),
-            ),
-            FFRoute(
-              name: MainSolicitacoesKanbanWidget.routeName,
-              path: MainSolicitacoesKanbanWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_solicitacoesKanban')
-                  : MainSolicitacoesKanbanWidget(),
-            ),
-            FFRoute(
-              name: MainSoliciKanbanBkpWidget.routeName,
-              path: MainSoliciKanbanBkpWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_soliciKanbanBkp')
-                  : MainSoliciKanbanBkpWidget(),
-            ),
-            FFRoute(
-              name: MainSolicitacoesKanbanbkpWidget.routeName,
-              path: MainSolicitacoesKanbanbkpWidget.routePath,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'Main_solicitacoesKanbanbkp')
-                  : MainSolicitacoesKanbanbkpWidget(),
+              name: MapaWidget.routeName,
+              path: MapaWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => MapaWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -470,7 +340,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/authLogin';
+            return '/login';
           }
           return null;
         },

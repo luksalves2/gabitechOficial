@@ -1116,6 +1116,30 @@ class FFAppState extends ChangeNotifier {
   set canceladasLane(bool value) {
     _canceladasLane = value;
   }
+
+  String _audioBytes = '';
+  String get audioBytes => _audioBytes;
+  set audioBytes(String value) {
+    _audioBytes = value;
+  }
+
+  String _menu = '';
+  String get menu => _menu;
+  set menu(String value) {
+    _menu = value;
+  }
+
+  int _atendimentoSelecionado = 0;
+  int get atendimentoSelecionado => _atendimentoSelecionado;
+  set atendimentoSelecionado(int value) {
+    _atendimentoSelecionado = value;
+  }
+
+  String _refreshConversa = '';
+  String get refreshConversa => _refreshConversa;
+  set refreshConversa(String value) {
+    _refreshConversa = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

@@ -23,60 +23,6 @@ class TestAPIsGroup {
 
 /// End Test APIs Group Code
 
-/// Start Contacts Group Code
-
-class ContactsGroup {
-  static String getBaseUrl({
-    String? instanceId = '3DF23FAF0A4FA081DA1332C54B267657',
-    String? instanceToken = '8D5DEA6580CC23C984D24A2E',
-    String? clientToken = 'Fe73c27882d0542948fb97a59abe2176eS',
-  }) =>
-      'https://api.z-api.io/instances/${instanceId}/token/${instanceToken}';
-  static Map<String, String> headers = {
-    'Client-Token': '[Client-Token]',
-  };
-  static PegarImagemDoContatoCall pegarImagemDoContatoCall =
-      PegarImagemDoContatoCall();
-}
-
-class PegarImagemDoContatoCall {
-  Future<ApiCallResponse> call({
-    String? phone = '',
-    String? instanceId = '3DF23FAF0A4FA081DA1332C54B267657',
-    String? instanceToken = '8D5DEA6580CC23C984D24A2E',
-    String? clientToken = 'Fe73c27882d0542948fb97a59abe2176eS',
-  }) async {
-    final baseUrl = ContactsGroup.getBaseUrl(
-      instanceId: instanceId,
-      instanceToken: instanceToken,
-      clientToken: clientToken,
-    );
-
-    return ApiManager.instance.makeApiCall(
-      callName: 'Pegar imagem do contato',
-      apiUrl: '${baseUrl}/profile-picture?phone=${phone}',
-      callType: ApiCallType.GET,
-      headers: {
-        'Client-Token': '${clientToken}',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  String? linkImagem(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.link''',
-      ));
-}
-
-/// End Contacts Group Code
-
 /// Start Mensagens Group Code
 
 class MensagensGroup {
@@ -597,7 +543,7 @@ class ListaHomeCall {
 class CidadaosCall {
   Future<ApiCallResponse> call({
     int? limit,
-    int? skip,
+    int? pagina,
     String? gabineteId = '',
     String? nome = '',
   }) async {
@@ -786,27 +732,60 @@ class CidadaosCall {
 
 /// End  tabelas por api  Group Code
 
-class APIEnviarTextoSimplesCall {
-  static Future<ApiCallResponse> call({
-    String? clientToken = '',
-    String? instanceId = '',
-    String? instanceToken = '',
-    String? phone = '',
-    String? message = '',
+/// Start Uazapi Group Code
+
+class UazapiGroup {
+  static String getBaseUrl() => 'https://gabitech.uazapi.com';
+  static Map<String, String> headers = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+  };
+  static CriarInstanciaCall criarInstanciaCall = CriarInstanciaCall();
+  static ConectarInstanciaCall conectarInstanciaCall = ConectarInstanciaCall();
+  static StatusInstanciaCall statusInstanciaCall = StatusInstanciaCall();
+  static ChatsCall chatsCall = ChatsCall();
+  static MensagensDeUmChatCall mensagensDeUmChatCall = MensagensDeUmChatCall();
+  static DadosDoContatoCall dadosDoContatoCall = DadosDoContatoCall();
+  static EnviarMensagemCall enviarMensagemCall = EnviarMensagemCall();
+  static EnviarImagemCall enviarImagemCall = EnviarImagemCall();
+  static EnviarVideoCall enviarVideoCall = EnviarVideoCall();
+  static EnviarDocumentoCall enviarDocumentoCall = EnviarDocumentoCall();
+  static EnviarAudioCall enviarAudioCall = EnviarAudioCall();
+  static BaixarAudioCall baixarAudioCall = BaixarAudioCall();
+  static BaixarImagemCall baixarImagemCall = BaixarImagemCall();
+  static BaixarDocCall baixarDocCall = BaixarDocCall();
+  static MensagensEmMassaTextoCall mensagensEmMassaTextoCall =
+      MensagensEmMassaTextoCall();
+  static MensagensEmMassaArquivosCall mensagensEmMassaArquivosCall =
+      MensagensEmMassaArquivosCall();
+  static MensagensEmMassaVideoCall mensagensEmMassaVideoCall =
+      MensagensEmMassaVideoCall();
+  static MensagensEmMassaDocumentoCall mensagensEmMassaDocumentoCall =
+      MensagensEmMassaDocumentoCall();
+  static ListarCampanhasCall listarCampanhasCall = ListarCampanhasCall();
+  static DeletarCampanhaCall deletarCampanhaCall = DeletarCampanhaCall();
+}
+
+class CriarInstanciaCall {
+  Future<ApiCallResponse> call({
+    String? nome = '',
   }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
     final ffApiRequestBody = '''
 {
-    "phone": "${escapeStringForJson(phone)}",
-    "message": "${escapeStringForJson(message)}",
-    "delayMessage": 15
+  "name": "${escapeStringForJson(nome)}",
+  "systemName": "apilocal"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'API Enviar texto simples',
-      apiUrl:
-          'https://api.z-api.io/instances/${instanceId}/token/${instanceToken}/send-text',
+      callName: 'Criar Instancia',
+      apiUrl: '${baseUrl}/instance/init',
       callType: ApiCallType.POST,
       headers: {
-        'Client-Token': '${clientToken}',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
       },
       params: {},
       body: ffApiRequestBody,
@@ -820,25 +799,66 @@ class APIEnviarTextoSimplesCall {
     );
   }
 
-  static String? messageId(dynamic response) => castToType<String>(getJsonField(
+  String? token(dynamic response) => castToType<String>(getJsonField(
         response,
-        r'''$.messageId''',
+        r'''$.instance.token''',
       ));
 }
 
-class APIPegarChatsCall {
-  static Future<ApiCallResponse> call({
-    String? clientToken = '',
-    String? instanceId = '',
-    String? instanceToken = '',
+class ConectarInstanciaCall {
+  Future<ApiCallResponse> call({
+    String? telefone = '',
+    String? token = '',
   }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "phone": "${escapeStringForJson(telefone)}"
+}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'API Pegar chats',
-      apiUrl:
-          'https://api.z-api.io/instances/${instanceId}/token/${instanceToken}/chats?page=1&pageSize=20',
+      callName: 'Conectar Instancia',
+      apiUrl: '${baseUrl}/instance/connect',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? codigo(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.instance.paircode''',
+      ));
+}
+
+class StatusInstanciaCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Status Instancia',
+      apiUrl: '${baseUrl}/instance/status',
       callType: ApiCallType.GET,
       headers: {
-        'Client-Token': '${clientToken}',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
       },
       params: {},
       returnBody: true,
@@ -850,43 +870,1858 @@ class APIPegarChatsCall {
     );
   }
 
-  static List<String>? name(dynamic response) => (getJsonField(
+  String? status(dynamic response) => castToType<String>(getJsonField(
         response,
-        r'''$[*].name''',
+        r'''$.instance.status''',
+      ));
+  String? nome(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.instance.profileName''',
+      ));
+  String? foto(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.instance.profilePicUrl''',
+      ));
+  String? telefone(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.instance.owner''',
+      ));
+}
+
+class ChatsCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    int? limite,
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "operator": "AND",
+  "sort": "-wa_lastMsgTimestamp",
+  "limit": ${limite},
+  "offset": 0,
+  "wa_isGroup": false
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Chats',
+      apiUrl: '${baseUrl}/chat/find',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? chats(dynamic response) => getJsonField(
+        response,
+        r'''$.chats''',
+        true,
+      ) as List?;
+}
+
+class MensagensDeUmChatCall {
+  Future<ApiCallResponse> call({
+    String? varToken = '',
+    String? chatId = '',
+    int? limit,
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "chatid": "${escapeStringForJson(chatId)}",
+  "limit": ${limit}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mensagens de um Chat',
+      apiUrl: '${baseUrl}/message/find',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${varToken}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? mensagens(dynamic response) => getJsonField(
+        response,
+        r'''$.messages''',
+        true,
+      ) as List?;
+  List<String>? idMensagem(dynamic response) => (getJsonField(
+        response,
+        r'''$.messages[:].id''',
         true,
       ) as List?)
           ?.withoutNulls
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static List<String>? phone(dynamic response) => (getJsonField(
+  dynamic nomeArquivoPDF(dynamic response) => getJsonField(
         response,
-        r'''$[*].phone''',
+        r'''$.messages[:].content.fileName''',
+      );
+  String? tipoMensagem(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.messages[:].messageType''',
+      ));
+  int? dataMensagem(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.messages[:].messageTimestamp''',
+      ));
+  String? mensagem(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.messages[:].text''',
+      ));
+}
+
+class DadosDoContatoCall {
+  Future<ApiCallResponse> call({
+    String? telefone = '',
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "preview": false
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dados do contato',
+      apiUrl: '${baseUrl}/chat/details',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? nome(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.name''',
+      ));
+  String? telefone(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.phone''',
+      ));
+}
+
+class EnviarMensagemCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? mensagem = '',
+    String? telefone = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "text": "${escapeStringForJson(mensagem)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Enviar Mensagem',
+      apiUrl: '${baseUrl}/send/text',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EnviarImagemCall {
+  Future<ApiCallResponse> call({
+    String? telefone = '',
+    String? texto = '',
+    String? imagem = '',
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "type": "image",
+  "text": "${escapeStringForJson(texto)}",
+  "file": "${escapeStringForJson(imagem)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Enviar Imagem',
+      apiUrl: '${baseUrl}/send/media',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EnviarVideoCall {
+  Future<ApiCallResponse> call({
+    String? telefone = '',
+    String? texto = '',
+    String? video = '',
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "type": "media",
+  "text": "${escapeStringForJson(texto)}",
+  "file": "<imagem>"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Enviar Video',
+      apiUrl: '${baseUrl}/send/media',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EnviarDocumentoCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? telefone = '',
+    String? documento = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "type": "document",
+  "file": "${escapeStringForJson(documento)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Enviar Documento',
+      apiUrl: '${baseUrl}/send/media',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EnviarAudioCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? telefone = '',
+    String? audio = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "number": "${escapeStringForJson(telefone)}",
+  "type": "audio",
+  "file": "${escapeStringForJson(audio)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Enviar Audio',
+      apiUrl: '${baseUrl}/send/media',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BaixarAudioCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? idAudio = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "id": "${escapeStringForJson(idAudio)}",
+  "generate_mp3": true
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Baixar Audio',
+      apiUrl: '${baseUrl}/message/download',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? url(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.fileURL''',
+      ));
+}
+
+class BaixarImagemCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? idImagem = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "id": "${escapeStringForJson(idImagem)}",
+  "return_link": true
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Baixar Imagem',
+      apiUrl: '${baseUrl}/message/download',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BaixarDocCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? idDoc = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "id": "${escapeStringForJson(idDoc)}",
+  "return_link": true
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Baixar Doc',
+      apiUrl: '${baseUrl}/message/download',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MensagensEmMassaTextoCall {
+  Future<ApiCallResponse> call({
+    List<String>? telefonesList,
+    String? token = '',
+    String? mensagem = '',
+    int? data,
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+    final telefones = _serializeList(telefonesList);
+
+    final ffApiRequestBody = '''
+{
+  "numbers": ${telefones},
+  "type": "text",
+  "delayMin": 0,
+  "delayMax": 0,
+  "scheduled_for": ${data},
+  "delay": 0,
+  "text": "${escapeStringForJson(mensagem)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mensagens em Massa Texto',
+      apiUrl: '${baseUrl}/sender/simple',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? folderId(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.folder_id''',
+      ));
+  String? status(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.status''',
+      ));
+}
+
+class MensagensEmMassaArquivosCall {
+  Future<ApiCallResponse> call({
+    List<String>? telefonesList,
+    String? token = '',
+    String? mensagem = '',
+    String? arquivo = '',
+    String? tipo = '',
+    int? data,
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+    final telefones = _serializeList(telefonesList);
+
+    final ffApiRequestBody = '''
+{
+  "numbers": ${telefones},
+  "type": "${escapeStringForJson(tipo)}",
+  "delayMin": 0,
+  "delayMax": 0,
+  "scheduled_for": ${data},
+  "delay": 0,
+  "text": "${escapeStringForJson(mensagem)}",
+  "file": "${escapeStringForJson(arquivo)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mensagens em Massa Arquivos',
+      apiUrl: '${baseUrl}/sender/simple',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? id(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.folder_id''',
+      ));
+}
+
+class MensagensEmMassaVideoCall {
+  Future<ApiCallResponse> call({
+    List<String>? telefonesList,
+    String? token = '',
+    String? mensagem = '',
+    String? video = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+    final telefones = _serializeList(telefonesList);
+
+    final ffApiRequestBody = '''
+{
+  "numbers": ${telefones},
+  "type": "video",
+  "delayMin": 0,
+  "delayMax": 0,
+  "scheduled_for": 0,
+  "delay": 0,
+  "text": "${escapeStringForJson(mensagem)}",
+  "file": "${escapeStringForJson(video)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mensagens em Massa Video',
+      apiUrl: '${baseUrl}/sender/simple',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MensagensEmMassaDocumentoCall {
+  Future<ApiCallResponse> call({
+    List<String>? telefonesList,
+    String? token = '',
+    String? mensagem = '',
+    String? documento = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+    final telefones = _serializeList(telefonesList);
+
+    final ffApiRequestBody = '''
+{
+  "numbers": ${telefones},
+  "type": "document",
+  "delayMin": 0,
+  "delayMax": 0,
+  "scheduled_for": 0,
+  "delay": 0,
+  "text": "${escapeStringForJson(mensagem)}",
+  "file": "${escapeStringForJson(documento)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Mensagens em Massa Documento',
+      apiUrl: '${baseUrl}/sender/simple',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ListarCampanhasCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Listar Campanhas',
+      apiUrl: '${baseUrl}/sender/listfolders',
+      callType: ApiCallType.GET,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<int>? entregues(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].log_delivered''',
         true,
       ) as List?)
           ?.withoutNulls
-          .map((x) => castToType<String>(x))
+          .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
-  static List<String>? lastMessageTime(dynamic response) => (getJsonField(
+  List<int>? falhas(dynamic response) => (getJsonField(
         response,
-        r'''$[*].lastMessageTime''',
+        r'''$[:].log_failed''',
         true,
       ) as List?)
           ?.withoutNulls
-          .map((x) => castToType<String>(x))
+          .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
-  static List<bool>? isGroupAnnouncement(dynamic response) => (getJsonField(
+  List<int>? totalReproduzido(dynamic response) => (getJsonField(
         response,
-        r'''$[:].isGroupAnnouncement''',
+        r'''$[:].log_played''',
         true,
       ) as List?)
           ?.withoutNulls
-          .map((x) => castToType<bool>(x))
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? totalMensagemLida(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].log_read''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? enviosSucessos(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].log_sucess''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<int>? totalTentativasDestinatarios(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].log_total''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
 }
+
+class DeletarCampanhaCall {
+  Future<ApiCallResponse> call({
+    String? idCampanha = '',
+    String? acao = '',
+    String? token = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "folder_id": "${escapeStringForJson(idCampanha)}",
+  "action": "${escapeStringForJson(acao)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Deletar Campanha',
+      apiUrl: '${baseUrl}/sender/edit',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End Uazapi Group Code
+
+/// Start Supabase Group Code
+
+class SupabaseGroup {
+  static String getBaseUrl() => 'https://xwwzsqjgksomniwkvznc.supabase.co';
+  static Map<String, String> headers = {
+    'apikey':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+    'Content-Type': 'application/json',
+  };
+  static AcessoresGabineteCall acessoresGabineteCall = AcessoresGabineteCall();
+  static AcessoresGabineteVereadorCall acessoresGabineteVereadorCall =
+      AcessoresGabineteVereadorCall();
+  static AtividadesGabineteCall atividadesGabineteCall =
+      AtividadesGabineteCall();
+  static CadastrarAcessorCall cadastrarAcessorCall = CadastrarAcessorCall();
+  static DetalhesDoUsuarioCall detalhesDoUsuarioCall = DetalhesDoUsuarioCall();
+  static DashboardCall dashboardCall = DashboardCall();
+  static GraficoDashboardCall graficoDashboardCall = GraficoDashboardCall();
+  static AniversariantesCall aniversariantesCall = AniversariantesCall();
+  static DashboardCidadaosCall dashboardCidadaosCall = DashboardCidadaosCall();
+  static SolicitacoesGabineteCall solicitacoesGabineteCall =
+      SolicitacoesGabineteCall();
+  static DashCidadaosCall dashCidadaosCall = DashCidadaosCall();
+  static TransmissoesCall transmissoesCall = TransmissoesCall();
+  static DadosDasCampanhasCall dadosDasCampanhasCall = DadosDasCampanhasCall();
+  static ListarBairrosCidadaosCall listarBairrosCidadaosCall =
+      ListarBairrosCidadaosCall();
+  static FiltrosCidadaosCampanhaCall filtrosCidadaosCampanhaCall =
+      FiltrosCidadaosCampanhaCall();
+  static InserirAcessorGabineteCall inserirAcessorGabineteCall =
+      InserirAcessorGabineteCall();
+  static CategoriasGabineteCall categoriasGabineteCall =
+      CategoriasGabineteCall();
+  static ExcuirTarefasECategoriasCall excuirTarefasECategoriasCall =
+      ExcuirTarefasECategoriasCall();
+  static ExcuirTarefasECategoriasCopyCall excuirTarefasECategoriasCopyCall =
+      ExcuirTarefasECategoriasCopyCall();
+  static ChatsAtendimentosCall chatsAtendimentosCall = ChatsAtendimentosCall();
+  static AtualizarSenhaCall atualizarSenhaCall = AtualizarSenhaCall();
+  static CidadaosMapaCall cidadaosMapaCall = CidadaosMapaCall();
+}
+
+class AcessoresGabineteCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Acessores Gabinete',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_acessores_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AcessoresGabineteVereadorCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Acessores Gabinete Vereador',
+      apiUrl: '${baseUrl}/rest/v1/rpc/detalhes_acessores_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? totalAcessores(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_acessores''',
+      ));
+  int? acessoresAtivos(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.acessores_ativos''',
+      ));
+  int? acessoresInativos(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.acessores_inativos''',
+      ));
+  List? acessoresLista(dynamic response) => getJsonField(
+        response,
+        r'''$.acessores''',
+        true,
+      ) as List?;
+}
+
+class AtividadesGabineteCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    String? varStatus = '',
+    String? varCategoria = '',
+    String? varTitulo = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete},
+  "p_status": "${escapeStringForJson(varStatus)}",
+  "p_categoria_nome": "${escapeStringForJson(varCategoria)}",
+  "p_titulo": "${escapeStringForJson(varTitulo)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Atividades Gabinete',
+      apiUrl: '${baseUrl}/rest/v1/rpc/dashboard_tarefas_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? totalTarefas(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_tarefas''',
+      ));
+  int? totalCategorias(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_categorias''',
+      ));
+  int? totalTarefasPendentes(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_tarefas_pendentes''',
+      ));
+  int? totalTarefasConcluidas(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_tarefas_concluidas''',
+      ));
+  List? tarefas(dynamic response) => getJsonField(
+        response,
+        r'''$.tarefas''',
+        true,
+      ) as List?;
+  List? categorias(dynamic response) => getJsonField(
+        response,
+        r'''$.categorias''',
+        true,
+      ) as List?;
+}
+
+class CadastrarAcessorCall {
+  Future<ApiCallResponse> call({
+    String? email = '',
+    String? senha = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "email": "${escapeStringForJson(email)}",
+  "password": "${escapeStringForJson(senha)}",
+  "email_confirm": true
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Cadastrar Acessor',
+      apiUrl: '${baseUrl}/auth/v1/admin/users',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTAyNjUxMiwiZXhwIjoyMDU2NjAyNTEyfQ.BKPG7LApWeYhSomFhRN1LO-1Rel7h3v2YVBC31w6cgw',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? uuid(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.id''',
+      ));
+}
+
+class DetalhesDoUsuarioCall {
+  Future<ApiCallResponse> call({
+    int? idUsuario,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_usuario_id": ${idUsuario}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Detalhes do Usuario',
+      apiUrl: '${baseUrl}/rest/v1/rpc/detalhes_avatar_usuario',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  String? iniciais(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.iniciais''',
+      ));
+  bool? temFoto(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.tem_foto''',
+      ));
+  String? foto(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.foto''',
+      ));
+}
+
+class DashboardCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dashboard',
+      apiUrl: '${baseUrl}/rest/v1/rpc/dashboard_solicitacoes_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? emAtendimento(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.em_atendimento''',
+      ));
+  int? novasSolicitacoes(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.novas_solicitacoes''',
+      ));
+  int? totalCidadaos(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.cidadaos_cadastrados''',
+      ));
+  int? atedimentosFinalizados(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.conversas_finalizadas''',
+      ));
+  int? solicitacoesSemanais(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.solicitacoes_semanais''',
+      ));
+  int? solicitacoesAtrasadas(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.solicitacoes_atrasadas''',
+      ));
+}
+
+class GraficoDashboardCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Grafico Dashboard',
+      apiUrl: '${baseUrl}/rest/v1/rpc/chart_solicitacoes_7_dias',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? labels(dynamic response) => (getJsonField(
+        response,
+        r'''$.labels''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? values(dynamic response) => (getJsonField(
+        response,
+        r'''$.values''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
+class AniversariantesCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    String? varPeriodo = '',
+    String? pesquisa = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete},
+  "p_periodo": "${escapeStringForJson(varPeriodo)}",
+  "p_pesquisa": "${escapeStringForJson(pesquisa)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Aniversariantes',
+      apiUrl: '${baseUrl}/rest/v1/rpc/aniversariantes_cidadaos',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DashboardCidadaosCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dashboard Cidadaos',
+      apiUrl: '${baseUrl}/rest/v1/rpc/dashboard_cidadaos_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? mediaIdade(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.media_idade''',
+      ));
+  int? totalCidadaos(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_cidadaos''',
+      ));
+  List<String>? cidadaosGeneroLabels(dynamic response) => (getJsonField(
+        response,
+        r'''$.cidadaos_generos.labels''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<int>? cidadaoGeneroValues(dynamic response) => (getJsonField(
+        response,
+        r'''$.cidadaos_generos.values''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List<String>? cidadaosFaixaEtariaLabels(dynamic response) => (getJsonField(
+        response,
+        r'''$.cidadaos_faixa_etaria.labels''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  int? totalPreCadastro(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_pre_cadastro''',
+      ));
+  List<int>? cidadaosFaixaEtariaValues(dynamic response) => (getJsonField(
+        response,
+        r'''$.cidadaos_faixa_etaria.values''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  List? bairros(dynamic response) => getJsonField(
+        response,
+        r'''$.cidadaos_bairro''',
+        true,
+      ) as List?;
+  dynamic? totalGeneros(dynamic response) => getJsonField(
+        response,
+        r'''$.total_generos''',
+      );
+  int? totalGenerosOutros(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_generos.outros''',
+      ));
+  int? totalFeminino(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_generos.feminino''',
+      ));
+  int? totalMasculino(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_generos.masculino''',
+      ));
+}
+
+class SolicitacoesGabineteCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    int? limite,
+    String? pesquisar = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete},
+  "p_limite": ${limite},
+  "p_pesquisa": "${escapeStringForJson(pesquisar)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Solicitacoes Gabinete',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_solicitacoes_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? listaStatus(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].status''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class DashCidadaosCall {
+  Future<ApiCallResponse> call({
+    String? idGabinete = '',
+    int? limite,
+    String? varStatus = '',
+    String? pesquisar = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dash Cidadaos',
+      apiUrl: '${baseUrl}/rest/v1/cidadaos',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'gabinete': idGabinete,
+        'limit': limite,
+        'status': varStatus,
+        'nome': pesquisar,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<int>? listaIds(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
+class TransmissoesCall {
+  Future<ApiCallResponse> call({
+    String? idGabinete = '',
+    String? varStatus = '',
+    int? varLimite,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Transmissoes',
+      apiUrl: '${baseUrl}/rest/v1/transmissoes',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'gabinete': idGabinete,
+        'status': varStatus,
+        'limit': varLimite,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class DadosDasCampanhasCall {
+  Future<ApiCallResponse> call({
+    dynamic? jsonJson,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final json = _serializeJson(jsonJson, true);
+    final ffApiRequestBody = '''
+{
+  "campanhas": ${json}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Dados Das Campanhas',
+      apiUrl: '${baseUrl}/rest/v1/rpc/calcular_resumo_campanhas',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? total(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total''',
+      ));
+  int? enviando(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.enviando''',
+      ));
+  int? agendados(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.agendados''',
+      ));
+  int? alcancados(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.alcancados''',
+      ));
+  int? finalizados(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.finalizados''',
+      ));
+}
+
+class ListarBairrosCidadaosCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Listar Bairros Cidadaos',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_filtros_cidadaos_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? bairros(dynamic response) => (getJsonField(
+        response,
+        r'''$.bairros''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  List<String>? perfis(dynamic response) => (getJsonField(
+        response,
+        r'''$.perfis''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class FiltrosCidadaosCampanhaCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    List<String>? bairrosList,
+    List<String>? perfisList,
+    String? genero = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+    final bairros = _serializeList(bairrosList);
+    final perfis = _serializeList(perfisList);
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete},
+  "p_bairros": ${bairros},
+  "p_perfis": ${perfis},
+  "p_genero": "${escapeStringForJson(genero)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Filtros Cidadaos Campanha',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_telefones_cidadaos_filtro',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? telefones(dynamic response) => (getJsonField(
+        response,
+        r'''$.telefones''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class InserirAcessorGabineteCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    String? acessor = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete},
+  "p_acessor": "${escapeStringForJson(acessor)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Inserir Acessor Gabinete',
+      apiUrl: '${baseUrl}/rest/v1/rpc/inserir_acessor_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CategoriasGabineteCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete_id": ${idGabinete}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Categorias Gabinete',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_categorias_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? categoriasItens(dynamic response) => (getJsonField(
+        response,
+        r'''$.categorias''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class ExcuirTarefasECategoriasCall {
+  Future<ApiCallResponse> call({
+    int? idCategoria,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_categoria_id": ${idCategoria}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Excuir Tarefas e Categorias',
+      apiUrl: '${baseUrl}/rest/v1/rpc/excluir_tarefas_por_categoria',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? categoriasItens(dynamic response) => (getJsonField(
+        response,
+        r'''$.categorias''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class ExcuirTarefasECategoriasCopyCall {
+  Future<ApiCallResponse> call({
+    int? idCategoria,
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_categoria_id": ${idCategoria}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Excuir Tarefas e Categorias Copy',
+      apiUrl: '${baseUrl}/rest/v1/rpc/excluir_categoria_com_tarefas',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List<String>? categoriasItens(dynamic response) => (getJsonField(
+        response,
+        r'''$.categorias''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+}
+
+class ChatsAtendimentosCall {
+  Future<ApiCallResponse> call({
+    int? idGabinete,
+    int? varLimit,
+    String? uuid = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete": ${idGabinete},
+  "p_usuario_uuid": "${escapeStringForJson(uuid)}",
+  "p_limit": ${varLimit}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Chats Atendimentos',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_atendimentos_gabinete',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AtualizarSenhaCall {
+  Future<ApiCallResponse> call({
+    String? novaSenha = '',
+    String? token = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "password": "${escapeStringForJson(novaSenha)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Atualizar Senha',
+      apiUrl: '${baseUrl}/auth/v1/user',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class CidadaosMapaCall {
+  Future<ApiCallResponse> call({
+    int? gabinete,
+    String? pesquisa = '',
+  }) async {
+    final baseUrl = SupabaseGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "p_gabinete": ${gabinete},
+  "p_pesquisa": "${escapeStringForJson(pesquisa)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Cidadaos Mapa',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_cidadaos_mapa',
+      callType: ApiCallType.POST,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? enderecos(dynamic response) => getJsonField(
+        response,
+        r'''$.enderecos''',
+        true,
+      ) as List?;
+}
+
+/// End Supabase Group Code
 
 class PegarImagemContatosViaSupabaseCall {
   static Future<ApiCallResponse> call({
@@ -1065,8 +2900,7 @@ class BuscarDadosCEPCall {
         response,
         r'''$.bairro''',
       ));
-  static String? localidade(dynamic response) =>
-      castToType<String>(getJsonField(
+  static String? cidade(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.localidade''',
       ));
@@ -1706,6 +3540,38 @@ class ImportCSVGoogleCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class ObterLatitudeLongitudeCall {
+  static Future<ApiCallResponse> call({
+    String? endereco = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Obter Latitude Longitude',
+      apiUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'address': endereco,
+        'key': "AIzaSyAe_c1JUnPBn1Mtn_wHOB7rHEuRLTGCDaY",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static double? latitude(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.results[:].geometry.location.lat''',
+      ));
+  static double? longitude(dynamic response) => castToType<double>(getJsonField(
+        response,
+        r'''$.results[:].geometry.location.lng''',
+      ));
 }
 
 class ApiPagingParams {

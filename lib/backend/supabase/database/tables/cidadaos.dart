@@ -14,11 +14,14 @@ class CidadaosRow extends SupabaseDataRow {
   @override
   SupabaseTable get table => CidadaosTable();
 
-  String get cidadaoId => getField<String>('cidadao_id')!;
-  set cidadaoId(String value) => setField<String>('cidadao_id', value);
+  int get id => getField<int>('id')!;
+  set id(int value) => setField<int>('id', value);
 
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
+
+  int? get gabinete => getField<int>('gabinete');
+  set gabinete(int? value) => setField<int>('gabinete', value);
 
   String? get nome => getField<String>('nome');
   set nome(String? value) => setField<String>('nome', value);
@@ -26,87 +29,56 @@ class CidadaosRow extends SupabaseDataRow {
   String? get email => getField<String>('email');
   set email(String? value) => setField<String>('email', value);
 
-  String? get phone => getField<String>('phone');
-  set phone(String? value) => setField<String>('phone', value);
+  String? get telefone => getField<String>('telefone');
+  set telefone(String? value) => setField<String>('telefone', value);
 
-  DateTime? get dtNascimento => getField<DateTime>('dt_nascimento');
-  set dtNascimento(DateTime? value) =>
-      setField<DateTime>('dt_nascimento', value);
+  String? get dataNascimento => getField<String>('data_nascimento');
+  set dataNascimento(String? value) =>
+      setField<String>('data_nascimento', value);
 
-  String? get logradouro => getField<String>('logradouro');
-  set logradouro(String? value) => setField<String>('logradouro', value);
+  String? get endereco => getField<String>('endereco');
+  set endereco(String? value) => setField<String>('endereco', value);
 
-  String? get bairro => getField<String>('bairro');
-  set bairro(String? value) => setField<String>('bairro', value);
+  String? get foto => getField<String>('foto');
+  set foto(String? value) => setField<String>('foto', value);
 
-  String? get cidade => getField<String>('cidade');
-  set cidade(String? value) => setField<String>('cidade', value);
+  String? get perfil => getField<String>('perfil');
+  set perfil(String? value) => setField<String>('perfil', value);
 
-  String? get uf => getField<String>('uf');
-  set uf(String? value) => setField<String>('uf', value);
+  int? get acessor => getField<int>('acessor');
+  set acessor(int? value) => setField<int>('acessor', value);
 
-  String? get cep => getField<String>('cep');
-  set cep(String? value) => setField<String>('cep', value);
-
-  int? get numero => getField<int>('numero');
-  set numero(int? value) => setField<int>('numero', value);
-
-  double? get latitudeG => getField<double>('latitude_g');
-  set latitudeG(double? value) => setField<double>('latitude_g', value);
-
-  double? get longitudeG => getField<double>('longitude_g');
-  set longitudeG(double? value) => setField<double>('longitude_g', value);
-
-  String? get categoriaId => getField<String>('categoria_id');
-  set categoriaId(String? value) => setField<String>('categoria_id', value);
-
-  String? get gabineteId => getField<String>('gabinete_id');
-  set gabineteId(String? value) => setField<String>('gabinete_id', value);
-
-  String? get statusId => getField<String>('status_id');
-  set statusId(String? value) => setField<String>('status_id', value);
-
-  String? get avatarUrl => getField<String>('avatar_url');
-  set avatarUrl(String? value) => setField<String>('avatar_url', value);
-
-  bool? get contatoGrupo => getField<bool>('contato_grupo');
-  set contatoGrupo(bool? value) => setField<bool>('contato_grupo', value);
-
-  String? get resumoConversa => getField<String>('resumo_conversa');
-  set resumoConversa(String? value) =>
-      setField<String>('resumo_conversa', value);
-
-  DateTime? get updateAt => getField<DateTime>('update_at');
-  set updateAt(DateTime? value) => setField<DateTime>('update_at', value);
-
-  String? get connectedPhone => getField<String>('connected_phone');
-  set connectedPhone(String? value) =>
-      setField<String>('connected_phone', value);
-
-  String? get dataNascimentoS => getField<String>('data_nascimento_s');
-  set dataNascimentoS(String? value) =>
-      setField<String>('data_nascimento_s', value);
-
-  String? get complemento => getField<String>('complemento');
-  set complemento(String? value) => setField<String>('complemento', value);
-
-  bool? get conversaFinalizada => getField<bool>('conversa_finalizada');
-  set conversaFinalizada(bool? value) =>
-      setField<bool>('conversa_finalizada', value);
-
-  bool? get conversaAtendida => getField<bool>('conversa_atendida');
-  set conversaAtendida(bool? value) =>
-      setField<bool>('conversa_atendida', value);
+  String? get status => getField<String>('status');
+  set status(String? value) => setField<String>('status', value);
 
   String? get genero => getField<String>('genero');
   set genero(String? value) => setField<String>('genero', value);
 
-  int? get idade => getField<int>('idade');
-  set idade(int? value) => setField<int>('idade', value);
+  String? get bairro => getField<String>('bairro');
+  set bairro(String? value) => setField<String>('bairro', value);
 
-  bool? get isGroup => getField<bool>('is_group');
-  set isGroup(bool? value) => setField<bool>('is_group', value);
+  String? get cep => getField<String>('cep');
+  set cep(String? value) => setField<String>('cep', value);
 
-  String? get tagTipo => getField<String>('tag_tipo');
-  set tagTipo(String? value) => setField<String>('tag_tipo', value);
+  String? get rua => getField<String>('rua');
+  set rua(String? value) => setField<String>('rua', value);
+
+  String? get cidade => getField<String>('cidade');
+  set cidade(String? value) => setField<String>('cidade', value);
+
+  String? get estado => getField<String>('estado');
+  set estado(String? value) => setField<String>('estado', value);
+
+  String? get complemento => getField<String>('complemento');
+  set complemento(String? value) => setField<String>('complemento', value);
+
+  String? get pontoReferencia => getField<String>('ponto_referencia');
+  set pontoReferencia(String? value) =>
+      setField<String>('ponto_referencia', value);
+
+  String? get latitude => getField<String>('latitude');
+  set latitude(String? value) => setField<String>('latitude', value);
+
+  String? get longitude => getField<String>('longitude');
+  set longitude(String? value) => setField<String>('longitude', value);
 }
