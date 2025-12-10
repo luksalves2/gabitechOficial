@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/menu_widget.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
@@ -137,12 +138,12 @@ class _MapaWidgetState extends State<MapaWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
-                                    child: FutureBuilder<List<CidadaosRow>>(
-                                      future: CidadaosTable().queryRows(
-                                        queryFn: (q) => q.eqOrNull(
-                                          'gabinete',
-                                          rowGabineteRow?.id,
-                                        ),
+                                    child: FutureBuilder<ApiCallResponse>(
+                                      future:
+                                          SupabaseGroup.cidadaosMapaCall.call(
+                                        gabinete: rowGabineteRow?.id,
+                                        pesquisa: _model
+                                            .txtPesquisarTextController.text,
                                       ),
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
@@ -162,8 +163,7 @@ class _MapaWidgetState extends State<MapaWidget> {
                                             ),
                                           );
                                         }
-                                        List<CidadaosRow>
-                                            containerCidadaosRowList =
+                                        final containerCidadaosMapaResponse =
                                             snapshot.data!;
 
                                         return Container(
@@ -225,11 +225,15 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                                       .max,
                                                               children: [
                                                                 Expanded(
-                                                                  child: Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '21on559y' /* Pesquise seus cidadãos por bai... */,
+                                                                  child:
+                                                                      SelectionArea(
+                                                                          child:
+                                                                              Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      currentUserLocationValue
+                                                                          ?.toString(),
+                                                                      '-',
                                                                     ),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
@@ -251,9 +255,75 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                                               .bodyMedium
                                                                               .fontStyle,
                                                                         ),
-                                                                  ),
+                                                                  )),
                                                                 ),
                                                               ],
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        15.0),
+                                                            child: Builder(
+                                                              builder:
+                                                                  (context) {
+                                                                final itens = functions
+                                                                    .listaLatLng(SupabaseGroup.cidadaosMapaCall
+                                                                        .enderecos(
+                                                                          containerCidadaosMapaResponse
+                                                                              .jsonBody,
+                                                                        )!
+                                                                        .toList())
+                                                                    .toList();
+
+                                                                return SingleChildScrollView(
+                                                                  scrollDirection:
+                                                                      Axis.horizontal,
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: List.generate(
+                                                                        itens
+                                                                            .length,
+                                                                        (itensIndex) {
+                                                                      final itensItem =
+                                                                          itens[
+                                                                              itensIndex];
+                                                                      return Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            0.0,
+                                                                            0.0,
+                                                                            15.0,
+                                                                            0.0),
+                                                                        child: SelectionArea(
+                                                                            child: Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            itensItem.toString(),
+                                                                            '-',
+                                                                          ),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                font: GoogleFonts.montserrat(
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                        )),
+                                                                      );
+                                                                    }),
+                                                                  ),
+                                                                );
+                                                              },
                                                             ),
                                                           ),
                                                           Container(
@@ -495,65 +565,59 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     10.0),
-                                                            child:
-                                                                FlutterFlowGoogleMap(
-                                                              controller: _model
-                                                                  .googleMapsController,
-                                                              onCameraIdle:
-                                                                  (latLng) =>
-                                                                      _model.googleMapsCenter =
-                                                                          latLng,
-                                                              initialLocation: _model
-                                                                      .googleMapsCenter ??=
-                                                                  currentUserLocationValue!,
-                                                              markers: functions
-                                                                  .listaLatLng(
-                                                                      containerCidadaosRowList
-                                                                          .map((e) => e
-                                                                              .latitude)
-                                                                          .withoutNulls
-                                                                          .toList(),
-                                                                      containerCidadaosRowList
-                                                                          .map((e) =>
-                                                                              e.longitude)
-                                                                          .withoutNulls
-                                                                          .toList())
-                                                                  .map(
-                                                                    (marker) =>
-                                                                        FlutterFlowMarker(
-                                                                      marker
+                                                            child: Builder(
+                                                                builder:
+                                                                    (context) {
+                                                              final _googleMapMarker =
+                                                                  currentUserLocationValue;
+                                                              return FlutterFlowGoogleMap(
+                                                                controller: _model
+                                                                    .googleMapsController,
+                                                                onCameraIdle:
+                                                                    (latLng) =>
+                                                                        _model.googleMapsCenter =
+                                                                            latLng,
+                                                                initialLocation:
+                                                                    _model.googleMapsCenter ??=
+                                                                        currentUserLocationValue!,
+                                                                markers: [
+                                                                  if (_googleMapMarker !=
+                                                                      null)
+                                                                    FlutterFlowMarker(
+                                                                      _googleMapMarker
                                                                           .serialize(),
-                                                                      marker,
+                                                                      _googleMapMarker,
                                                                     ),
-                                                                  )
-                                                                  .toList(),
-                                                              markerColor:
-                                                                  GoogleMarkerColor
-                                                                      .violet,
-                                                              mapType: MapType
-                                                                  .normal,
-                                                              style:
-                                                                  GoogleMapStyle
-                                                                      .standard,
-                                                              initialZoom: 14.0,
-                                                              allowInteraction:
-                                                                  true,
-                                                              allowZoom: true,
-                                                              showZoomControls:
-                                                                  true,
-                                                              showLocation:
-                                                                  true,
-                                                              showCompass:
-                                                                  false,
-                                                              showMapToolbar:
-                                                                  false,
-                                                              showTraffic:
-                                                                  false,
-                                                              centerMapOnMarkerTap:
-                                                                  true,
-                                                              mapTakesGesturePreference:
-                                                                  false,
-                                                            ),
+                                                                ],
+                                                                markerColor:
+                                                                    GoogleMarkerColor
+                                                                        .violet,
+                                                                mapType: MapType
+                                                                    .normal,
+                                                                style:
+                                                                    GoogleMapStyle
+                                                                        .standard,
+                                                                initialZoom:
+                                                                    14.0,
+                                                                allowInteraction:
+                                                                    true,
+                                                                allowZoom: true,
+                                                                showZoomControls:
+                                                                    true,
+                                                                showLocation:
+                                                                    true,
+                                                                showCompass:
+                                                                    false,
+                                                                showMapToolbar:
+                                                                    false,
+                                                                showTraffic:
+                                                                    false,
+                                                                centerMapOnMarkerTap:
+                                                                    true,
+                                                                mapTakesGesturePreference:
+                                                                    false,
+                                                              );
+                                                            }),
                                                           ),
                                                         ),
                                                       ),

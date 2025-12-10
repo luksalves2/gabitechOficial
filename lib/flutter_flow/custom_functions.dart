@@ -421,22 +421,31 @@ String prazoSolicitacao(
   return '$dia/$mes/$ano';
 }
 
-List<LatLng> listaLatLng(
-  List<String> latitude,
-  List<String> longitude,
-) {
+List<LatLng> listaLatLng(List<String> enderecos) {
   final List<LatLng> resultado = [];
 
-  // Garante que não estoure índice
-  final int tamanho =
-      latitude.length < longitude.length ? latitude.length : longitude.length;
+  for (final endereco in enderecos) {
+    try {
+      // Remove texto fixo
+      final cleaned = endereco
+          .replaceAll('LatLng(', '')
+          .replaceAll(')', '')
+          .replaceAll('lat:', '')
+          .replaceAll('lng:', '');
 
-  for (int i = 0; i < tamanho; i++) {
-    final double? lat = double.tryParse(latitude[i]);
-    final double? lng = double.tryParse(longitude[i]);
+      // Divide lat e lng
+      final parts = cleaned.split(',');
 
-    if (lat != null && lng != null) {
-      resultado.add(LatLng(lat, lng));
+      if (parts.length == 2) {
+        final lat = double.tryParse(parts[0].trim());
+        final lng = double.tryParse(parts[1].trim());
+
+        if (lat != null && lng != null) {
+          resultado.add(LatLng(lat, lng));
+        }
+      }
+    } catch (_) {
+      // Ignora valores inválidos
     }
   }
 

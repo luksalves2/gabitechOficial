@@ -2695,7 +2695,7 @@ class CidadaosMapaCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Cidadaos Mapa',
-      apiUrl: '${baseUrl}/rest/v1/rpc/listar_cidadaos_mapa',
+      apiUrl: '${baseUrl}/rest/v1/rpc/listar_cidadaos_latlng',
       callType: ApiCallType.POST,
       headers: {
         'apikey':
@@ -2714,11 +2714,15 @@ class CidadaosMapaCall {
     );
   }
 
-  List? enderecos(dynamic response) => getJsonField(
+  List<String>? enderecos(dynamic response) => (getJsonField(
         response,
         r'''$.enderecos''',
         true,
-      ) as List?;
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 /// End Supabase Group Code

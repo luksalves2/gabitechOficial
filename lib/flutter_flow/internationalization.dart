@@ -2193,15 +2193,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapa
   {
-    '21on559y': {
-      'en': 'Pesquise seus cidadãos por bairro ou rua',
-      'hi': '',
-      'ml': '',
-      'or': '',
-      'ta': '',
-      'te': '',
-      'ur': '',
-    },
     'x9t9imd8': {
       'en': 'Pesquisar...',
       'hi': '',
