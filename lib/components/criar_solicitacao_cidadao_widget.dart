@@ -361,7 +361,7 @@ class _CriarSolicitacaoCidadaoWidgetState
                                           ),
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtTituloTextControllerValidator
                                           .asValidator(context),
@@ -570,7 +570,7 @@ class _CriarSolicitacaoCidadaoWidgetState
                                       maxLines: 7,
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtDescricaoTextControllerValidator
                                           .asValidator(context),
@@ -765,7 +765,7 @@ class _CriarSolicitacaoCidadaoWidgetState
                                       maxLines: 4,
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtResumoTextControllerValidator
                                           .asValidator(context),
@@ -1187,7 +1187,7 @@ class _CriarSolicitacaoCidadaoWidgetState
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtPrazoTextControllerValidator
                                                 .asValidator(context),

@@ -232,8 +232,12 @@ dynamic deserializeParam<T>(
             return MensagensRow(data);
           case SolicitacoesRow:
             return SolicitacoesRow(data);
+          case NotificacoesRow:
+            return NotificacoesRow(data);
           case CategoriasSolicitacoesRow:
             return CategoriasSolicitacoesRow(data);
+          case ChamadoRow:
+            return ChamadoRow(data);
           case UsuariosRow:
             return UsuariosRow(data);
           case CidadaosRow:

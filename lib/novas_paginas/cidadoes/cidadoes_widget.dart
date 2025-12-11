@@ -4589,6 +4589,61 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                           ),
                                                                         ),
                                                                       ),
+                                                                      Container(
+                                                                        width:
+                                                                            150.0,
+                                                                        height:
+                                                                            40.0,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.only(
+                                                                            bottomLeft:
+                                                                                Radius.circular(0.0),
+                                                                            bottomRight:
+                                                                                Radius.circular(0.0),
+                                                                            topLeft:
+                                                                                Radius.circular(0.0),
+                                                                            topRight:
+                                                                                Radius.circular(0.0),
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              8.0,
+                                                                              0.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Expanded(
+                                                                                child: Padding(
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                  child: Text(
+                                                                                    FFLocalizations.of(context).getText(
+                                                                                      '7kbeppcw' /* Editar */,
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          font: GoogleFonts.montserrat(
+                                                                                            fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                          fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
                                                                     ],
                                                                   ),
                                                                 ),
@@ -4917,6 +4972,98 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                                                         fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                                       ),
                                                                                                 ),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                ),
+                                                                                FutureBuilder<List<SolicitacoesRow>>(
+                                                                                  future: SolicitacoesTable().queryRows(
+                                                                                    queryFn: (q) => q.eqOrNull(
+                                                                                      'cidadao',
+                                                                                      getJsonField(
+                                                                                        cidadaosCadastradosItensItem,
+                                                                                        r'''$.id''',
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  builder: (context, snapshot) {
+                                                                                    // Customize what your widget looks like when it's loading.
+                                                                                    if (!snapshot.hasData) {
+                                                                                      return Center(
+                                                                                        child: SizedBox(
+                                                                                          width: 50.0,
+                                                                                          height: 50.0,
+                                                                                          child: CircularProgressIndicator(
+                                                                                            valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                              FlutterFlowTheme.of(context).primary,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                    List<SolicitacoesRow> containerSolicitacoesRowList = snapshot.data!;
+
+                                                                                    return Container(
+                                                                                      width: 150.0,
+                                                                                      height: 40.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        borderRadius: BorderRadius.only(
+                                                                                          bottomLeft: Radius.circular(0.0),
+                                                                                          bottomRight: Radius.circular(0.0),
+                                                                                          topLeft: Radius.circular(0.0),
+                                                                                          topRight: Radius.circular(0.0),
+                                                                                        ),
+                                                                                      ),
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                                                        child: Row(
+                                                                                          mainAxisSize: MainAxisSize.max,
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          children: [
+                                                                                            InkWell(
+                                                                                              splashColor: Colors.transparent,
+                                                                                              focusColor: Colors.transparent,
+                                                                                              hoverColor: Colors.transparent,
+                                                                                              highlightColor: Colors.transparent,
+                                                                                              onTap: () async {
+                                                                                                await showModalBottomSheet(
+                                                                                                  isScrollControlled: true,
+                                                                                                  backgroundColor: Colors.transparent,
+                                                                                                  enableDrag: false,
+                                                                                                  context: context,
+                                                                                                  builder: (context) {
+                                                                                                    return GestureDetector(
+                                                                                                      onTap: () {
+                                                                                                        FocusScope.of(context).unfocus();
+                                                                                                        FocusManager.instance.primaryFocus?.unfocus();
+                                                                                                      },
+                                                                                                      child: Padding(
+                                                                                                        padding: MediaQuery.viewInsetsOf(context),
+                                                                                                        child: EditarCidadaoWidget(
+                                                                                                          idCidadao: getJsonField(
+                                                                                                            cidadaosCadastradosItensItem,
+                                                                                                            r'''$.id''',
+                                                                                                          ),
+                                                                                                          idGbinete: columnGabineteRow!.id,
+                                                                                                          atualizar: () async {
+                                                                                                            safeSetState(() => _model.apiRequestCompleter2 = null);
+                                                                                                            await _model.waitForApiRequestCompleted2();
+                                                                                                          },
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                    );
+                                                                                                  },
+                                                                                                ).then((value) => safeSetState(() {}));
+                                                                                              },
+                                                                                              child: Icon(
+                                                                                                Icons.edit,
+                                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                size: 24.0,
                                                                                               ),
                                                                                             ),
                                                                                           ],

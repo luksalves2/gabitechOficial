@@ -859,14 +859,14 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                                           valueOrDefault<
                                                               String>(
                                                             dateTimeFormat(
-                                                              "d/M/y",
+                                                              "Hm",
                                                               _model
                                                                   .datePicked2,
                                                               locale: FFLocalizations
                                                                       .of(context)
                                                                   .languageCode,
                                                             ),
-                                                            'dd/mm/aaaa',
+                                                            'HH:MM',
                                                           ),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
@@ -1578,6 +1578,43 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                       ),
                                     ),
                                   ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 0.0, 12.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'uv20dzki' /* Selecione um arquivo  ou "Sem ... */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.montserrat(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 if (_model.midiaEnviada != null &&
                                     _model.midiaEnviada != '')

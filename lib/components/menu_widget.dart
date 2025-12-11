@@ -1274,6 +1274,159 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            FFAppState().menu = 'notificacoes';
+                            safeSetState(() {});
+
+                            context.pushNamed(
+                              NotificacoesWidget.routeName,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 12.0,
+                                  color: FFAppState().menu == 'acessores'
+                                      ? Color(0x6E3B82F6)
+                                      : Colors.white,
+                                  offset: Offset(
+                                    0.0,
+                                    5.0,
+                                  ),
+                                )
+                              ],
+                              gradient: LinearGradient(
+                                colors: [
+                                  valueOrDefault<Color>(
+                                    FFAppState().menu == 'acessores'
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : Colors.white,
+                                    Colors.white,
+                                  ),
+                                  valueOrDefault<Color>(
+                                    FFAppState().menu == 'acessores'
+                                        ? FlutterFlowTheme.of(context).secondary
+                                        : Colors.white,
+                                    Colors.white,
+                                  )
+                                ],
+                                stops: [0.0, 1.0],
+                                begin: AlignmentDirectional(0.94, -1.0),
+                                end: AlignmentDirectional(-0.94, 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Icon(
+                                    Icons.notifications_none_rounded,
+                                    color: valueOrDefault<Color>(
+                                      () {
+                                        if (_model.mouseRegionHovered8!) {
+                                          return FlutterFlowTheme.of(context)
+                                              .primary;
+                                        } else if (FFAppState().menu ==
+                                            'notificacoes') {
+                                          return Colors.white;
+                                        } else {
+                                          return FlutterFlowTheme.of(context)
+                                              .secondaryText;
+                                        }
+                                      }(),
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                    ),
+                                    size: 18.0,
+                                  ),
+                                  if (_model.abrirFechar == 'aberto')
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'w5dfejcv' /* Notificações */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.montserrat(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: valueOrDefault<Color>(
+                                                  () {
+                                                    if (_model
+                                                        .mouseRegionHovered8!) {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .primary;
+                                                    } else if (FFAppState()
+                                                            .menu ==
+                                                        'notificacoes') {
+                                                      return Colors.white;
+                                                    } else {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryText;
+                                                    }
+                                                  }(),
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                                ),
+                                                fontSize: 15.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      onEnter: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered8 = true);
+                      }),
+                      onExit: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered8 = false);
+                      }),
+                    ),
+                    MouseRegion(
+                      opaque: false,
+                      cursor: MouseCursor.defer ?? MouseCursor.defer,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 20.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
                             FFAppState().menu = 'perfil';
                             safeSetState(() {});
 
@@ -1335,11 +1488,11 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                     Icons.person,
                                     color: valueOrDefault<Color>(
                                       () {
-                                        if (_model.mouseRegionHovered8!) {
+                                        if (_model.mouseRegionHovered9!) {
                                           return FlutterFlowTheme.of(context)
                                               .primary;
                                         } else if (FFAppState().menu ==
-                                            'acessores') {
+                                            'perfil') {
                                           return Colors.white;
                                         } else {
                                           return FlutterFlowTheme.of(context)
@@ -1374,13 +1527,13 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                                 color: valueOrDefault<Color>(
                                                   () {
                                                     if (_model
-                                                        .mouseRegionHovered8!) {
+                                                        .mouseRegionHovered9!) {
                                                       return FlutterFlowTheme
                                                               .of(context)
                                                           .primary;
                                                     } else if (FFAppState()
                                                             .menu ==
-                                                        'acessores') {
+                                                        'perfil') {
                                                       return Colors.white;
                                                     } else {
                                                       return FlutterFlowTheme
@@ -1409,10 +1562,10 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered8 = true);
+                        safeSetState(() => _model.mouseRegionHovered9 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered8 = false);
+                        safeSetState(() => _model.mouseRegionHovered9 = false);
                       }),
                     ),
                   ],

@@ -28,6 +28,11 @@ class CadastrarAcessorModel extends FlutterFlowModel<CadastrarAcessorWidget> {
   TextEditingController? txtTelefoneTextController;
   late MaskTextInputFormatter txtTelefoneMask;
   String? Function(BuildContext, String?)? txtTelefoneTextControllerValidator;
+  // State field(s) for txtCargo widget.
+  FocusNode? txtCargoFocusNode;
+  TextEditingController? txtCargoTextController;
+  late MaskTextInputFormatter txtCargoMask;
+  String? Function(BuildContext, String?)? txtCargoTextControllerValidator;
   // State field(s) for txtSenha widget.
   FocusNode? txtSenhaFocusNode;
   TextEditingController? txtSenhaTextController;
@@ -60,6 +65,9 @@ class CadastrarAcessorModel extends FlutterFlowModel<CadastrarAcessorWidget> {
 
     txtTelefoneFocusNode?.dispose();
     txtTelefoneTextController?.dispose();
+
+    txtCargoFocusNode?.dispose();
+    txtCargoTextController?.dispose();
 
     txtSenhaFocusNode?.dispose();
     txtSenhaTextController?.dispose();

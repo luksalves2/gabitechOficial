@@ -568,6 +568,16 @@ class _MensagensWidgetState extends State<MensagensWidget> {
                                                                         null);
                                                                 await _model
                                                                     .waitForRequestCompleted4();
+                                                                safeSetState(() =>
+                                                                    _model.requestCompleter1 =
+                                                                        null);
+                                                                await _model
+                                                                    .waitForRequestCompleted1();
+                                                                safeSetState(() =>
+                                                                    _model.requestCompleter4 =
+                                                                        null);
+                                                                await _model
+                                                                    .waitForRequestCompleted4();
                                                                 await _model
                                                                     .listviewMensagensScrollController
                                                                     ?.animateTo(

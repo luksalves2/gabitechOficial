@@ -17,3 +17,5 @@ export '/novas_paginas/acessores/acessores_widget.dart' show AcessoresWidget;
 export '/novas_paginas/transmissoes/transmissoes_widget.dart'
     show TransmissoesWidget;
 export '/novas_paginas/mapa/mapa_widget.dart' show MapaWidget;
+export '/novas_paginas/notificacoes/notificacoes_widget.dart'
+    show NotificacoesWidget;

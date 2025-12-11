@@ -81,4 +81,8 @@ class CidadaosRow extends SupabaseDataRow {
 
   String? get longitude => getField<String>('longitude');
   set longitude(String? value) => setField<String>('longitude', value);
+
+  String? get numeroResidencia => getField<String>('numero_residencia');
+  set numeroResidencia(String? value) =>
+      setField<String>('numero_residencia', value);
 }

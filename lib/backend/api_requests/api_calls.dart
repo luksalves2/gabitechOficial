@@ -3557,7 +3557,7 @@ class ObterLatitudeLongitudeCall {
       headers: {},
       params: {
         'address': endereco,
-        'key': "AIzaSyAe_c1JUnPBn1Mtn_wHOB7rHEuRLTGCDaY",
+        'key': "AIzaSyA1tRzs1-1fLMUErqmC9MGisHlnQnDqynE",
       },
       returnBody: true,
       encodeBodyUtf8: false,

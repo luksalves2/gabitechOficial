@@ -17,14 +17,35 @@ import 'package:provider/provider.dart';
 class CadastroCidadaoModel extends FlutterFlowModel<CadastroCidadaoWidget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for txtNome widget.
   FocusNode? txtNomeFocusNode;
   TextEditingController? txtNomeTextController;
   String? Function(BuildContext, String?)? txtNomeTextControllerValidator;
+  String? _txtNomeTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        '6vola8el' /* Campo obrigatório * */,
+      );
+    }
+
+    return null;
+  }
+
   // State field(s) for txtEmail widget.
   FocusNode? txtEmailFocusNode;
   TextEditingController? txtEmailTextController;
   String? Function(BuildContext, String?)? txtEmailTextControllerValidator;
+  String? _txtEmailTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        'xjsc9ykv' /* Campo obrigatório * */,
+      );
+    }
+
+    return null;
+  }
+
   // State field(s) for txtTelefone widget.
   FocusNode? txtTelefoneFocusNode;
   TextEditingController? txtTelefoneTextController;
@@ -58,6 +79,10 @@ class CadastroCidadaoModel extends FlutterFlowModel<CadastroCidadaoWidget> {
   FocusNode? txtEstadoFocusNode;
   TextEditingController? txtEstadoTextController;
   String? Function(BuildContext, String?)? txtEstadoTextControllerValidator;
+  // State field(s) for txtNumero widget.
+  FocusNode? txtNumeroFocusNode;
+  TextEditingController? txtNumeroTextController;
+  String? Function(BuildContext, String?)? txtNumeroTextControllerValidator;
   // State field(s) for txtComplemento widget.
   FocusNode? txtComplementoFocusNode;
   TextEditingController? txtComplementoTextController;
@@ -74,12 +99,26 @@ class CadastroCidadaoModel extends FlutterFlowModel<CadastroCidadaoWidget> {
   FocusNode? txtPerfilFocusNode;
   TextEditingController? txtPerfilTextController;
   String? Function(BuildContext, String?)? txtPerfilTextControllerValidator;
+  String? _txtPerfilTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        '706g491v' /* Campo obrigatório * */,
+      );
+    }
+
+    return null;
+  }
+
   // State field(s) for dropAcessor widget.
   int? dropAcessorValue;
   FormFieldController<int>? dropAcessorValueController;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    txtNomeTextControllerValidator = _txtNomeTextControllerValidator;
+    txtEmailTextControllerValidator = _txtEmailTextControllerValidator;
+    txtPerfilTextControllerValidator = _txtPerfilTextControllerValidator;
+  }
 
   @override
   void dispose() {
@@ -109,6 +148,9 @@ class CadastroCidadaoModel extends FlutterFlowModel<CadastroCidadaoWidget> {
 
     txtEstadoFocusNode?.dispose();
     txtEstadoTextController?.dispose();
+
+    txtNumeroFocusNode?.dispose();
+    txtNumeroTextController?.dispose();
 
     txtComplementoFocusNode?.dispose();
     txtComplementoTextController?.dispose();

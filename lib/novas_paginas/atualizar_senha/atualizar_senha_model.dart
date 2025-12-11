@@ -13,14 +13,15 @@ import 'package:provider/provider.dart';
 class AtualizarSenhaModel extends FlutterFlowModel<AtualizarSenhaWidget> {
   ///  State fields for stateful widgets in this component.
 
-  // State field(s) for txtTitulo widget.
-  FocusNode? txtTituloFocusNode;
-  TextEditingController? txtTituloTextController;
-  String? Function(BuildContext, String?)? txtTituloTextControllerValidator;
-  // State field(s) for txtDescricao widget.
-  FocusNode? txtDescricaoFocusNode;
-  TextEditingController? txtDescricaoTextController;
-  String? Function(BuildContext, String?)? txtDescricaoTextControllerValidator;
+  // State field(s) for txtNovaSenha widget.
+  FocusNode? txtNovaSenhaFocusNode;
+  TextEditingController? txtNovaSenhaTextController;
+  String? Function(BuildContext, String?)? txtNovaSenhaTextControllerValidator;
+  // State field(s) for txtConfirmarSenha widget.
+  FocusNode? txtConfirmarSenhaFocusNode;
+  TextEditingController? txtConfirmarSenhaTextController;
+  String? Function(BuildContext, String?)?
+      txtConfirmarSenhaTextControllerValidator;
   // Stores action output result for [Backend Call - API (Atualizar Senha)] action in Button widget.
   ApiCallResponse? atualizarSenha;
 
@@ -29,10 +30,10 @@ class AtualizarSenhaModel extends FlutterFlowModel<AtualizarSenhaWidget> {
 
   @override
   void dispose() {
-    txtTituloFocusNode?.dispose();
-    txtTituloTextController?.dispose();
+    txtNovaSenhaFocusNode?.dispose();
+    txtNovaSenhaTextController?.dispose();
 
-    txtDescricaoFocusNode?.dispose();
-    txtDescricaoTextController?.dispose();
+    txtConfirmarSenhaFocusNode?.dispose();
+    txtConfirmarSenhaTextController?.dispose();
   }
 }

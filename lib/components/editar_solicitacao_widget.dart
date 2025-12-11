@@ -365,7 +365,7 @@ class _EditarSolicitacaoWidgetState extends State<EditarSolicitacaoWidget> {
                                           ),
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtTituloTextController1Validator
                                           .asValidator(context),
@@ -578,7 +578,7 @@ class _EditarSolicitacaoWidgetState extends State<EditarSolicitacaoWidget> {
                                       maxLines: 7,
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtDescricaoTextControllerValidator
                                           .asValidator(context),

@@ -2420,10 +2420,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
             ),
             body: FutureBuilder<List<GabineteRow>>(
               future: GabineteTable().querySingleRow(
-                queryFn: (q) => q.containsOrNull(
-                  'acessores',
-                  '{${currentUserUid}}',
-                ),
+                queryFn: (q) => q.or(
+                    "acessores.cs.{${currentUserUid}}, usuario.eq.${currentUserUid}"),
               ),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
@@ -2953,8 +2951,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                         (context) {
                                                                       final todos = containerSolicitacoesSolicitacoesRowList
                                                                           .where((e) =>
-                                                                              e.status ==
-                                                                              'todos')
+                                                                              (e.status == 'todos') &&
+                                                                              (e.gabinete == rowGabineteRow?.id))
                                                                           .toList();
 
                                                                       return ListView
@@ -3276,8 +3274,10 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                       (context) {
                                                                     final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                         .where((e) =>
-                                                                            e.status ==
-                                                                            'em analise')
+                                                                            (e.status ==
+                                                                                'em analise') &&
+                                                                            (e.gabinete ==
+                                                                                rowGabineteRow?.id))
                                                                         .toList();
 
                                                                     return ListView
@@ -3608,8 +3608,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                         (context) {
                                                                       final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                           .where((e) =>
-                                                                              e.status ==
-                                                                              'em andamento')
+                                                                              (e.status == 'em andamento') &&
+                                                                              (e.gabinete == rowGabineteRow?.id))
                                                                           .toList();
 
                                                                       return ListView
@@ -3930,8 +3930,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                         (context) {
                                                                       final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                           .where((e) =>
-                                                                              e.status ==
-                                                                              'finalizado')
+                                                                              (e.status == 'finalizado') &&
+                                                                              (e.gabinete == rowGabineteRow?.id))
                                                                           .toList();
 
                                                                       return ListView
@@ -4220,8 +4220,10 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                       (context) {
                                                                     final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                         .where((e) =>
-                                                                            e.status ==
-                                                                            'em atraso')
+                                                                            (e.status ==
+                                                                                'em atraso') &&
+                                                                            (e.gabinete ==
+                                                                                rowGabineteRow?.id))
                                                                         .toList();
 
                                                                     return ListView
@@ -4552,8 +4554,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                         (context) {
                                                                       final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                           .where((e) =>
-                                                                              e.status ==
-                                                                              'programado')
+                                                                              (e.status == 'programado') &&
+                                                                              (e.gabinete == rowGabineteRow?.id))
                                                                           .toList();
 
                                                                       return ListView
@@ -4874,8 +4876,8 @@ class _SolicitacoesWidgetState extends State<SolicitacoesWidget> {
                                                                         (context) {
                                                                       final emAnaliseItens = containerSolicitacoesSolicitacoesRowList
                                                                           .where((e) =>
-                                                                              e.status ==
-                                                                              'aguardando retorno')
+                                                                              (e.status == 'aguardando retorno') &&
+                                                                              (e.gabinete == rowGabineteRow?.id))
                                                                           .toList();
 
                                                                       return ListView

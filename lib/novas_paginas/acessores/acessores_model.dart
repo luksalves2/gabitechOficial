@@ -27,8 +27,6 @@ class AcessoresModel extends FlutterFlowModel<AcessoresWidget> {
   bool mouseRegionHovered1 = false;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered2 = false;
-  // State field(s) for MouseRegion widget.
-  bool mouseRegionHovered3 = false;
 
   @override
   void initState(BuildContext context) {

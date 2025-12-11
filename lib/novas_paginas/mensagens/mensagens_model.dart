@@ -65,6 +65,7 @@ class MensagensModel extends FlutterFlowModel<MensagensWidget> {
   ScrollController? colunaChatsScrollController;
   Completer<List<AtendimentosRow>>? requestCompleter2;
   Completer<List<CidadaosRow>>? requestCompleter4;
+  Completer<List<SolicitacoesRow>>? requestCompleter1;
   // State field(s) for Column widget.
   ScrollController? columnController1;
   // State field(s) for listviewMensagens widget.
@@ -101,7 +102,6 @@ class MensagensModel extends FlutterFlowModel<MensagensWidget> {
   ApiCallResponse? enviarMensagem2;
   // State field(s) for Column widget.
   ScrollController? columnController3;
-  Completer<List<SolicitacoesRow>>? requestCompleter1;
 
   @override
   void initState(BuildContext context) {

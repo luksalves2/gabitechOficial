@@ -32,11 +32,11 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
     super.initState();
     _model = createModel(context, () => AtualizarSenhaModel());
 
-    _model.txtTituloTextController ??= TextEditingController();
-    _model.txtTituloFocusNode ??= FocusNode();
+    _model.txtNovaSenhaTextController ??= TextEditingController();
+    _model.txtNovaSenhaFocusNode ??= FocusNode();
 
-    _model.txtDescricaoTextController ??= TextEditingController();
-    _model.txtDescricaoFocusNode ??= FocusNode();
+    _model.txtConfirmarSenhaTextController ??= TextEditingController();
+    _model.txtConfirmarSenhaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -152,10 +152,10 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.txtTituloTextController,
-                          focusNode: _model.txtTituloFocusNode,
+                          controller: _model.txtNovaSenhaTextController,
+                          focusNode: _model.txtNovaSenhaFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
-                            '_model.txtTituloTextController',
+                            '_model.txtNovaSenhaTextController',
                             Duration(milliseconds: 0),
                             () => safeSetState(() {}),
                           ),
@@ -258,7 +258,7 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
                           enableInteractiveSelection: false,
-                          validator: _model.txtTituloTextControllerValidator
+                          validator: _model.txtNovaSenhaTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -309,10 +309,10 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                       child: Container(
                         width: double.infinity,
                         child: TextFormField(
-                          controller: _model.txtDescricaoTextController,
-                          focusNode: _model.txtDescricaoFocusNode,
+                          controller: _model.txtConfirmarSenhaTextController,
+                          focusNode: _model.txtConfirmarSenhaFocusNode,
                           onChanged: (_) => EasyDebounce.debounce(
-                            '_model.txtDescricaoTextController',
+                            '_model.txtConfirmarSenhaTextController',
                             Duration(milliseconds: 0),
                             () => safeSetState(() {}),
                           ),
@@ -415,7 +415,8 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
                           enableInteractiveSelection: false,
-                          validator: _model.txtDescricaoTextControllerValidator
+                          validator: _model
+                              .txtConfirmarSenhaTextControllerValidator
                               .asValidator(context),
                         ),
                       ),
@@ -521,11 +522,12 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                     ),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        if (_model.txtTituloTextController.text ==
-                            _model.txtDescricaoTextController.text) {
+                        if (_model.txtNovaSenhaTextController.text ==
+                            _model.txtConfirmarSenhaTextController.text) {
                           _model.atualizarSenha =
                               await SupabaseGroup.atualizarSenhaCall.call(
-                            novaSenha: _model.txtTituloTextController.text,
+                            novaSenha:
+                                _model.txtConfirmarSenhaTextController.text,
                             token: currentJwtToken,
                           );
 

@@ -565,59 +565,63 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                             padding:
                                                                 EdgeInsets.all(
                                                                     10.0),
-                                                            child: Builder(
-                                                                builder:
-                                                                    (context) {
-                                                              final _googleMapMarker =
-                                                                  currentUserLocationValue;
-                                                              return FlutterFlowGoogleMap(
-                                                                controller: _model
-                                                                    .googleMapsController,
-                                                                onCameraIdle:
-                                                                    (latLng) =>
-                                                                        _model.googleMapsCenter =
-                                                                            latLng,
-                                                                initialLocation:
-                                                                    _model.googleMapsCenter ??=
-                                                                        currentUserLocationValue!,
-                                                                markers: [
-                                                                  if (_googleMapMarker !=
-                                                                      null)
-                                                                    FlutterFlowMarker(
-                                                                      _googleMapMarker
+                                                            child:
+                                                                FlutterFlowGoogleMap(
+                                                              controller: _model
+                                                                  .googleMapsController,
+                                                              onCameraIdle:
+                                                                  (latLng) =>
+                                                                      _model.googleMapsCenter =
+                                                                          latLng,
+                                                              initialLocation: _model
+                                                                      .googleMapsCenter ??=
+                                                                  LatLng(
+                                                                      13.106061,
+                                                                      -59.613158),
+                                                              markers: functions
+                                                                  .listaLatLng(SupabaseGroup
+                                                                      .cidadaosMapaCall
+                                                                      .enderecos(
+                                                                        containerCidadaosMapaResponse
+                                                                            .jsonBody,
+                                                                      )!
+                                                                      .toList())
+                                                                  .map(
+                                                                    (marker) =>
+                                                                        FlutterFlowMarker(
+                                                                      marker
                                                                           .serialize(),
-                                                                      _googleMapMarker,
+                                                                      marker,
                                                                     ),
-                                                                ],
-                                                                markerColor:
-                                                                    GoogleMarkerColor
-                                                                        .violet,
-                                                                mapType: MapType
-                                                                    .normal,
-                                                                style:
-                                                                    GoogleMapStyle
-                                                                        .standard,
-                                                                initialZoom:
-                                                                    14.0,
-                                                                allowInteraction:
-                                                                    true,
-                                                                allowZoom: true,
-                                                                showZoomControls:
-                                                                    true,
-                                                                showLocation:
-                                                                    true,
-                                                                showCompass:
-                                                                    false,
-                                                                showMapToolbar:
-                                                                    false,
-                                                                showTraffic:
-                                                                    false,
-                                                                centerMapOnMarkerTap:
-                                                                    true,
-                                                                mapTakesGesturePreference:
-                                                                    false,
-                                                              );
-                                                            }),
+                                                                  )
+                                                                  .toList(),
+                                                              markerColor:
+                                                                  GoogleMarkerColor
+                                                                      .violet,
+                                                              mapType: MapType
+                                                                  .normal,
+                                                              style:
+                                                                  GoogleMapStyle
+                                                                      .standard,
+                                                              initialZoom: 14.0,
+                                                              allowInteraction:
+                                                                  true,
+                                                              allowZoom: true,
+                                                              showZoomControls:
+                                                                  true,
+                                                              showLocation:
+                                                                  true,
+                                                              showCompass:
+                                                                  false,
+                                                              showMapToolbar:
+                                                                  false,
+                                                              showTraffic:
+                                                                  false,
+                                                              centerMapOnMarkerTap:
+                                                                  true,
+                                                              mapTakesGesturePreference:
+                                                                  false,
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

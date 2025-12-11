@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 class EditarCidadaoModel extends FlutterFlowModel<EditarCidadaoWidget> {
   ///  State fields for stateful widgets in this component.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for txtNome widget.
   FocusNode? txtNomeFocusNode;
   TextEditingController? txtNomeTextController;
@@ -58,6 +59,10 @@ class EditarCidadaoModel extends FlutterFlowModel<EditarCidadaoWidget> {
   FocusNode? txtEstadoFocusNode;
   TextEditingController? txtEstadoTextController;
   String? Function(BuildContext, String?)? txtEstadoTextControllerValidator;
+  // State field(s) for txtNumero widget.
+  FocusNode? txtNumeroFocusNode;
+  TextEditingController? txtNumeroTextController;
+  String? Function(BuildContext, String?)? txtNumeroTextControllerValidator;
   // State field(s) for txtComplemento widget.
   FocusNode? txtComplementoFocusNode;
   TextEditingController? txtComplementoTextController;
@@ -74,6 +79,16 @@ class EditarCidadaoModel extends FlutterFlowModel<EditarCidadaoWidget> {
   FocusNode? txtPerfilFocusNode;
   TextEditingController? txtPerfilTextController;
   String? Function(BuildContext, String?)? txtPerfilTextControllerValidator;
+  String? _txtPerfilTextControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return FFLocalizations.of(context).getText(
+        't56k6nbp' /* Campo obrigatório * */,
+      );
+    }
+
+    return null;
+  }
+
   // State field(s) for dropAcessor widget.
   int? dropAcessorValue;
   FormFieldController<int>? dropAcessorValueController;
@@ -81,7 +96,9 @@ class EditarCidadaoModel extends FlutterFlowModel<EditarCidadaoWidget> {
   ApiCallResponse? obterLatLng;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    txtPerfilTextControllerValidator = _txtPerfilTextControllerValidator;
+  }
 
   @override
   void dispose() {
@@ -111,6 +128,9 @@ class EditarCidadaoModel extends FlutterFlowModel<EditarCidadaoWidget> {
 
     txtEstadoFocusNode?.dispose();
     txtEstadoTextController?.dispose();
+
+    txtNumeroFocusNode?.dispose();
+    txtNumeroTextController?.dispose();
 
     txtComplementoFocusNode?.dispose();
     txtComplementoTextController?.dispose();

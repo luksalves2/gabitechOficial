@@ -426,15 +426,8 @@ List<LatLng> listaLatLng(List<String> enderecos) {
 
   for (final endereco in enderecos) {
     try {
-      // Remove texto fixo
-      final cleaned = endereco
-          .replaceAll('LatLng(', '')
-          .replaceAll(')', '')
-          .replaceAll('lat:', '')
-          .replaceAll('lng:', '');
-
-      // Divide lat e lng
-      final parts = cleaned.split(',');
+      // Esperado: "-29.675649, -51.119057"
+      final parts = endereco.split(',');
 
       if (parts.length == 2) {
         final lat = double.tryParse(parts[0].trim());

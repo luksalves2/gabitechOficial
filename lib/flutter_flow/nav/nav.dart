@@ -167,6 +167,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: MapaWidget.routePath,
               requireAuth: true,
               builder: (context, params) => MapaWidget(),
+            ),
+            FFRoute(
+              name: NotificacoesWidget.routeName,
+              path: NotificacoesWidget.routePath,
+              requireAuth: true,
+              builder: (context, params) => NotificacoesWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

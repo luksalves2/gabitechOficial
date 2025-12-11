@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/novas_paginas/atualizar_senha/atualizar_senha_widget.dart';
+import '/novas_paginas/chamados/chamados_widget.dart';
 import '/novas_paginas/conectar_whatsapp/conectar_whatsapp_widget.dart';
 import 'dart:ui';
 import '/index.dart';

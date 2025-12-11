@@ -495,8 +495,10 @@ class _CriarCategoriaWidgetState extends State<CriarCategoriaWidget> {
                               supaSerialize<DateTime>(getCurrentTimestamp),
                           'nome': _model.txtTituloTextController.text,
                           'gabinete': widget!.idGabinete,
-                          'cor':
-                              functions.converterCorString(_model.colorPicked!),
+                          'cor': _model.colorPicked != null
+                              ? functions
+                                  .converterCorString(_model.colorPicked!)
+                              : '#2563eb',
                         });
                         await widget.atualizar?.call();
                         Navigator.pop(context);
