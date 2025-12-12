@@ -2457,7 +2457,7 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                                           width: 16.0,
                                                                                           height: 16.0,
                                                                                           decoration: BoxDecoration(
-                                                                                            color: FlutterFlowTheme.of(context).secondary,
+                                                                                            color: Color(0xFEFF00B6),
                                                                                             shape: BoxShape.circle,
                                                                                           ),
                                                                                         ),
@@ -2465,7 +2465,7 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                                       Expanded(
                                                                                         child: Text(
                                                                                           FFLocalizations.of(context).getText(
-                                                                                            's6get860' /* Masculino */,
+                                                                                            's6get860' /* Feminino */,
                                                                                           ),
                                                                                           style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                                 font: GoogleFonts.montserrat(
@@ -2528,7 +2528,7 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                                         width: 16.0,
                                                                                         height: 16.0,
                                                                                         decoration: BoxDecoration(
-                                                                                          color: Color(0xFEFF00B6),
+                                                                                          color: FlutterFlowTheme.of(context).secondary,
                                                                                           shape: BoxShape.circle,
                                                                                         ),
                                                                                       ),
@@ -2536,7 +2536,7 @@ class _CidadoesWidgetState extends State<CidadoesWidget>
                                                                                     Expanded(
                                                                                       child: Text(
                                                                                         FFLocalizations.of(context).getText(
-                                                                                          't7fc4kxp' /* Feminino */,
+                                                                                          't7fc4kxp' /* Masculino */,
                                                                                         ),
                                                                                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                               font: GoogleFonts.montserrat(

@@ -2256,7 +2256,7 @@ class _DetalhesSolicitacoesWidgetState
                                                                         context)
                                                                     .primaryText,
                                                             enableInteractiveSelection:
-                                                                false,
+                                                                true,
                                                             validator: _model
                                                                 .txtDescricaoTextControllerValidator
                                                                 .asValidator(
@@ -2881,7 +2881,7 @@ class _DetalhesSolicitacoesWidgetState
                                                                       context)
                                                                   .primaryText,
                                                           enableInteractiveSelection:
-                                                              false,
+                                                              true,
                                                           validator: _model
                                                               .txtTarefaTituloTextControllerValidator
                                                               .asValidator(
@@ -3066,7 +3066,7 @@ class _DetalhesSolicitacoesWidgetState
                                                                         context)
                                                                     .primaryText,
                                                             enableInteractiveSelection:
-                                                                false,
+                                                                true,
                                                             validator: _model
                                                                 .txtTarefaDescricaoTextControllerValidator
                                                                 .asValidator(
@@ -3110,6 +3110,8 @@ class _DetalhesSolicitacoesWidgetState
                                                                     .text,
                                                                 'status':
                                                                     'pendente',
+                                                                'uuid_responsavel':
+                                                                    currentUserUid,
                                                               });
                                                               safeSetState(() {
                                                                 _model
@@ -3203,12 +3205,17 @@ class _DetalhesSolicitacoesWidgetState
                                                             ..complete(
                                                                 TarefasTable()
                                                                     .queryRows(
-                                                              queryFn: (q) =>
-                                                                  q.eqOrNull(
-                                                                'categoria',
-                                                                rowSolicitacoesRow
-                                                                    ?.categoriaId,
-                                                              ),
+                                                              queryFn: (q) => q
+                                                                  .eqOrNull(
+                                                                    'categoria',
+                                                                    rowSolicitacoesRow
+                                                                        ?.categoriaId,
+                                                                  )
+                                                                  .eqOrNull(
+                                                                    'gabinete',
+                                                                    rowSolicitacoesRow
+                                                                        ?.gabinete,
+                                                                  ),
                                                             )))
                                                       .future,
                                                   builder: (context, snapshot) {
@@ -3304,6 +3311,121 @@ class _DetalhesSolicitacoesWidgetState
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
+                                                                            FutureBuilder<List<UsuariosRow>>(
+                                                                              future: UsuariosTable().querySingleRow(
+                                                                                queryFn: (q) => q.eqOrNull(
+                                                                                  'uuid',
+                                                                                  colunaTarefasTarefasRow.uuidResponsavel,
+                                                                                ),
+                                                                              ),
+                                                                              builder: (context, snapshot) {
+                                                                                // Customize what your widget looks like when it's loading.
+                                                                                if (!snapshot.hasData) {
+                                                                                  return Center(
+                                                                                    child: SizedBox(
+                                                                                      width: 50.0,
+                                                                                      height: 50.0,
+                                                                                      child: CircularProgressIndicator(
+                                                                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                                                                          FlutterFlowTheme.of(context).primary,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  );
+                                                                                }
+                                                                                List<UsuariosRow> rowUsuariosRowList = snapshot.data!;
+
+                                                                                final rowUsuariosRow = rowUsuariosRowList.isNotEmpty ? rowUsuariosRowList.first : null;
+
+                                                                                return Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  children: [
+                                                                                    Container(
+                                                                                      width: 40.0,
+                                                                                      height: 40.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).secondary,
+                                                                                        shape: BoxShape.circle,
+                                                                                      ),
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                      child: Column(
+                                                                                        mainAxisSize: MainAxisSize.max,
+                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            valueOrDefault<String>(
+                                                                                              functions.iniciaisNome(rowUsuariosRow!.nome!),
+                                                                                              '-',
+                                                                                            ),
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  font: GoogleFonts.montserrat(
+                                                                                                    fontWeight: FontWeight.w600,
+                                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                  ),
+                                                                                                  color: Colors.white,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FontWeight.w600,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ),
+                                                                                    Expanded(
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                                                                                        child: Text(
+                                                                                          valueOrDefault<String>(
+                                                                                            rowUsuariosRow?.nome,
+                                                                                            '-',
+                                                                                          ),
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                font: GoogleFonts.montserrat(
+                                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                                ),
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                              ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                );
+                                                                              },
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 8.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Expanded(
+                                                                                    child: Text(
+                                                                                      '${dateTimeFormat(
+                                                                                        "d/M/y",
+                                                                                        colunaTarefasTarefasRow.createdAt,
+                                                                                        locale: FFLocalizations.of(context).languageCode,
+                                                                                      )} ás ${dateTimeFormat(
+                                                                                        "Hm",
+                                                                                        colunaTarefasTarefasRow.createdAt,
+                                                                                        locale: FFLocalizations.of(context).languageCode,
+                                                                                      )}',
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            font: GoogleFonts.montserrat(
+                                                                                              fontWeight: FontWeight.w300,
+                                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                            ),
+                                                                                            fontSize: 13.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            fontWeight: FontWeight.w300,
+                                                                                            fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
                                                                             Row(
                                                                               mainAxisSize: MainAxisSize.max,
                                                                               children: [

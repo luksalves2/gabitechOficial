@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -268,62 +267,49 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                                         0.0,
                                                                         0.0,
                                                                         15.0),
-                                                            child: Builder(
-                                                              builder:
-                                                                  (context) {
-                                                                final itens = functions
-                                                                    .listaLatLng(SupabaseGroup.cidadaosMapaCall
-                                                                        .enderecos(
-                                                                          containerCidadaosMapaResponse
-                                                                              .jsonBody,
-                                                                        )!
-                                                                        .toList())
-                                                                    .toList();
-
-                                                                return SingleChildScrollView(
-                                                                  scrollDirection:
-                                                                      Axis.horizontal,
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    children: List.generate(
-                                                                        itens
-                                                                            .length,
-                                                                        (itensIndex) {
-                                                                      final itensItem =
-                                                                          itens[
-                                                                              itensIndex];
-                                                                      return Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                            child:
+                                                                SingleChildScrollView(
+                                                              scrollDirection:
+                                                                  Axis.horizontal,
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
                                                                             0.0,
                                                                             0.0,
                                                                             15.0,
                                                                             0.0),
-                                                                        child: SelectionArea(
-                                                                            child: Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            itensItem.toString(),
-                                                                            '-',
+                                                                    child: SelectionArea(
+                                                                        child: Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'zs8f714b' /* lj */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            font:
+                                                                                GoogleFonts.montserrat(
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                           ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                font: GoogleFonts.montserrat(
-                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                                ),
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
-                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
-                                                                              ),
-                                                                        )),
-                                                                      );
-                                                                    }),
+                                                                    )),
                                                                   ),
-                                                                );
-                                                              },
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                           Container(
@@ -575,26 +561,7 @@ class _MapaWidgetState extends State<MapaWidget> {
                                                                           latLng,
                                                               initialLocation: _model
                                                                       .googleMapsCenter ??=
-                                                                  LatLng(
-                                                                      13.106061,
-                                                                      -59.613158),
-                                                              markers: functions
-                                                                  .listaLatLng(SupabaseGroup
-                                                                      .cidadaosMapaCall
-                                                                      .enderecos(
-                                                                        containerCidadaosMapaResponse
-                                                                            .jsonBody,
-                                                                      )!
-                                                                      .toList())
-                                                                  .map(
-                                                                    (marker) =>
-                                                                        FlutterFlowMarker(
-                                                                      marker
-                                                                          .serialize(),
-                                                                      marker,
-                                                                    ),
-                                                                  )
-                                                                  .toList(),
+                                                                  currentUserLocationValue!,
                                                               markerColor:
                                                                   GoogleMarkerColor
                                                                       .violet,

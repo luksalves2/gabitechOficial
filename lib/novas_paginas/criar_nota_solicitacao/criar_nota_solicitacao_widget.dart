@@ -265,7 +265,7 @@ class _CriarNotaSolicitacaoWidgetState
                                         .fontStyle,
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model.txtTituloTextControllerValidator
                               .asValidator(context),
                         ),
@@ -423,7 +423,7 @@ class _CriarNotaSolicitacaoWidgetState
                                   ),
                           maxLines: 5,
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model.txtDescricaoTextControllerValidator
                               .asValidator(context),
                         ),

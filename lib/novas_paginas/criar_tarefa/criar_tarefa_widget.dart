@@ -1,3 +1,4 @@
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -265,7 +266,7 @@ class _CriarTarefaWidgetState extends State<CriarTarefaWidget> {
                                         .fontStyle,
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model.txtTituloTextControllerValidator
                               .asValidator(context),
                         ),
@@ -550,7 +551,7 @@ class _CriarTarefaWidgetState extends State<CriarTarefaWidget> {
                                   ),
                           maxLines: 5,
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model.txtDescricaoTextControllerValidator
                               .asValidator(context),
                         ),
@@ -665,6 +666,7 @@ class _CriarTarefaWidgetState extends State<CriarTarefaWidget> {
                           'titulo': _model.txtTituloTextController.text,
                           'descricao': _model.txtDescricaoTextController.text,
                           'status': 'pendente',
+                          'uuid_responsavel': currentUserUid,
                         });
                         await widget.atualizar?.call();
                         Navigator.pop(context);

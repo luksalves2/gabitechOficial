@@ -1789,7 +1789,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ur': '',
     },
     's6get860': {
-      'en': 'Masculino',
+      'en': 'Feminino',
       'hi': '',
       'ml': '',
       'or': '',
@@ -1798,7 +1798,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ur': '',
     },
     't7fc4kxp': {
-      'en': 'Feminino',
+      'en': 'Masculino',
       'hi': '',
       'ml': '',
       'or': '',
@@ -2202,6 +2202,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // mapa
   {
+    'zs8f714b': {
+      'en': 'lj',
+      'hi': '',
+      'ml': '',
+      'or': '',
+      'ta': '',
+      'te': '',
+      'ur': '',
+    },
     'x9t9imd8': {
       'en': 'Pesquisar...',
       'hi': '',
@@ -2565,7 +2574,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'te': '',
       'ur': '',
     },
-    't3q9ur24': {
+    'l57h7es4': {
       'en': 'Cidadãos',
       'hi': '',
       'ml': '',
@@ -2575,7 +2584,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ur': '',
     },
     'kj6933jo': {
-      'en': 'Acessores',
+      'en': 'Assessores',
       'hi': '',
       'ml': '',
       'or': '',
@@ -3127,7 +3136,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ur': '',
     },
     '4l42z1p4': {
-      'en': 'ex: Mercaidnho',
+      'en': 'ex: Mercadinho',
       'hi': '',
       'ml': '',
       'or': '',
@@ -3517,7 +3526,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // cadastrarAcessor
   {
     '9dccug46': {
-      'en': 'Cadastrar novo acessor',
+      'en': 'Cadastrar novo assessor',
       'hi': '',
       'ml': '',
       'or': '',
@@ -5097,15 +5106,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'te': '',
       'ur': '',
     },
-    'lr8ptd5f': {
-      'en': 'Tarefa concluída com sucesso',
-      'hi': '',
-      'ml': '',
-      'or': '',
-      'ta': '',
-      'te': '',
-      'ur': '',
-    },
     'v0s5o0w5': {
       'en': 'Titulo',
       'hi': '',
@@ -5126,15 +5126,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'xqn2lwv1': {
       'en': 'Categoria',
-      'hi': '',
-      'ml': '',
-      'or': '',
-      'ta': '',
-      'te': '',
-      'ur': '',
-    },
-    'urw1h6ix': {
-      'en': 'Selecione',
       'hi': '',
       'ml': '',
       'or': '',

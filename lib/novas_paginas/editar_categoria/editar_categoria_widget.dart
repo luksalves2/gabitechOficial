@@ -300,7 +300,7 @@ class _EditarCategoriaWidgetState extends State<EditarCategoriaWidget> {
                                   ),
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
-                              enableInteractiveSelection: false,
+                              enableInteractiveSelection: true,
                               validator: _model.txtTituloTextControllerValidator
                                   .asValidator(context),
                             ),

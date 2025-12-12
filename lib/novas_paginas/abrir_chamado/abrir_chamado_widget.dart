@@ -295,7 +295,7 @@ class _AbrirChamadoWidgetState extends State<AbrirChamadoWidget> {
                                   ),
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
-                              enableInteractiveSelection: false,
+                              enableInteractiveSelection: true,
                               validator: _model.txtTituloTextControllerValidator
                                   .asValidator(context),
                             ),
@@ -456,7 +456,7 @@ class _AbrirChamadoWidgetState extends State<AbrirChamadoWidget> {
                               maxLines: 8,
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
-                              enableInteractiveSelection: false,
+                              enableInteractiveSelection: true,
                               validator: _model
                                   .txtDescricaoTextControllerValidator
                                   .asValidator(context),

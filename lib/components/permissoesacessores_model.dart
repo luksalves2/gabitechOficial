@@ -27,7 +27,6 @@ class PermissoesacessoresModel
   // State field(s) for txtCargo widget.
   FocusNode? txtCargoFocusNode;
   TextEditingController? txtCargoTextController;
-  late MaskTextInputFormatter txtCargoMask;
   String? Function(BuildContext, String?)? txtCargoTextControllerValidator;
   // State field(s) for switchAtendimentos widget.
   bool? switchAtendimentosValue;

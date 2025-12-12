@@ -2661,7 +2661,7 @@ class AtualizarSenhaCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Atualizar Senha',
       apiUrl: '${baseUrl}/auth/v1/user',
-      callType: ApiCallType.POST,
+      callType: ApiCallType.PUT,
       headers: {
         'apikey':
             'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3d3pzcWpna3NvbW5pd2t2em5jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMjY1MTIsImV4cCI6MjA1NjYwMjUxMn0.wgqz5pmNzEjZJnhpA6qiWoMKTuIKe2FN3EZHnGwT6Go',

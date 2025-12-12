@@ -34,4 +34,8 @@ class TarefasRow extends SupabaseDataRow {
 
   String? get status => getField<String>('status');
   set status(String? value) => setField<String>('status', value);
+
+  String? get uuidResponsavel => getField<String>('uuid_responsavel');
+  set uuidResponsavel(String? value) =>
+      setField<String>('uuid_responsavel', value);
 }

@@ -980,7 +980,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 12.0,
-                                    color: FFAppState().menu == 'cidadaos'
+                                    color: FFAppState().menu == 'transmissoes'
                                         ? Color(0x6E3B82F6)
                                         : Colors.white,
                                     offset: Offset(
@@ -992,13 +992,13 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                 gradient: LinearGradient(
                                   colors: [
                                     valueOrDefault<Color>(
-                                      FFAppState().menu == 'cidadaos'
+                                      FFAppState().menu == 'transmissoes'
                                           ? FlutterFlowTheme.of(context).primary
                                           : Colors.white,
                                       Colors.white,
                                     ),
                                     valueOrDefault<Color>(
-                                      FFAppState().menu == 'cidadaos'
+                                      FFAppState().menu == 'transmissoes'
                                           ? FlutterFlowTheme.of(context)
                                               .secondary
                                           : Colors.white,
@@ -1035,7 +1035,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
                                       ),
-                                      size: 18.0,
+                                      size: 20.0,
                                     ),
                                     if (_model.abrirFechar == 'aberto')
                                       Expanded(
@@ -1045,7 +1045,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                                   8.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              't3q9ur24' /* Cidadãos */,
+                                              'l57h7es4' /* Cidadãos */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -1203,7 +1203,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                                   8.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'kj6933jo' /* Acessores */,
+                                              'kj6933jo' /* Assessores */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
@@ -1295,7 +1295,7 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 12.0,
-                                  color: FFAppState().menu == 'acessores'
+                                  color: FFAppState().menu == 'notificacoes'
                                       ? Color(0x6E3B82F6)
                                       : Colors.white,
                                   offset: Offset(
@@ -1307,13 +1307,13 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                               gradient: LinearGradient(
                                 colors: [
                                   valueOrDefault<Color>(
-                                    FFAppState().menu == 'acessores'
+                                    FFAppState().menu == 'notificacoes'
                                         ? FlutterFlowTheme.of(context).primary
                                         : Colors.white,
                                     Colors.white,
                                   ),
                                   valueOrDefault<Color>(
-                                    FFAppState().menu == 'acessores'
+                                    FFAppState().menu == 'notificacoes'
                                         ? FlutterFlowTheme.of(context).secondary
                                         : Colors.white,
                                     Colors.white,

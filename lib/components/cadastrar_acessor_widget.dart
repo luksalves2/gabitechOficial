@@ -54,7 +54,6 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
     _model.txtCargoTextController ??= TextEditingController();
     _model.txtCargoFocusNode ??= FocusNode();
 
-    _model.txtCargoMask = MaskTextInputFormatter(mask: '(##) # ####-####');
     _model.txtSenhaTextController ??= TextEditingController();
     _model.txtSenhaFocusNode ??= FocusNode();
 
@@ -145,7 +144,7 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                     10.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '9dccug46' /* Cadastrar novo acessor */,
+                                    '9dccug46' /* Cadastrar novo assessor */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
@@ -348,7 +347,7 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                       ),
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtNomeTextControllerValidator
                                       .asValidator(context),
@@ -526,7 +525,7 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                       ),
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtEmailTextControllerValidator
                                       .asValidator(context),
@@ -705,7 +704,7 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                   keyboardType: TextInputType.number,
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtTelefoneTextControllerValidator
                                       .asValidator(context),
@@ -882,14 +881,12 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                             .bodyMedium
                                             .fontStyle,
                                       ),
-                                  keyboardType: TextInputType.number,
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtCargoTextControllerValidator
                                       .asValidator(context),
-                                  inputFormatters: [_model.txtCargoMask],
                                 ),
                               ),
                             ),
@@ -1064,7 +1061,7 @@ class _CadastrarAcessorWidgetState extends State<CadastrarAcessorWidget> {
                                       ),
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtSenhaTextControllerValidator
                                       .asValidator(context),

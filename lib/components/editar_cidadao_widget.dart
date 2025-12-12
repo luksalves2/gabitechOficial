@@ -360,7 +360,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    enableInteractiveSelection: false,
+                                    enableInteractiveSelection: true,
                                     validator: _model
                                         .txtNomeTextControllerValidator
                                         .asValidator(context),
@@ -548,7 +548,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    enableInteractiveSelection: false,
+                                    enableInteractiveSelection: true,
                                     validator: _model
                                         .txtEmailTextControllerValidator
                                         .asValidator(context),
@@ -737,7 +737,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                     keyboardType: TextInputType.number,
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    enableInteractiveSelection: false,
+                                    enableInteractiveSelection: true,
                                     validator: _model
                                         .txtTelefoneTextControllerValidator
                                         .asValidator(context),
@@ -928,7 +928,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    enableInteractiveSelection: false,
+                                    enableInteractiveSelection: true,
                                     validator: _model
                                         .txtDataNascimentoTextControllerValidator
                                         .asValidator(context),
@@ -1165,7 +1165,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                           ),
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtCepTextControllerValidator
                                           .asValidator(context),
@@ -1392,7 +1392,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtRuaTextControllerValidator
                                                 .asValidator(context),
@@ -1615,7 +1615,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtBairroTextControllerValidator
                                                 .asValidator(context),
@@ -1847,7 +1847,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtCidadeTextControllerValidator
                                                 .asValidator(context),
@@ -2070,7 +2070,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtEstadoTextControllerValidator
                                                 .asValidator(context),
@@ -2293,7 +2293,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtNumeroTextControllerValidator
                                                 .asValidator(context),
@@ -2525,7 +2525,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtComplementoTextControllerValidator
                                                 .asValidator(context),
@@ -2748,7 +2748,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                             cursorColor:
                                                 FlutterFlowTheme.of(context)
                                                     .primaryText,
-                                            enableInteractiveSelection: false,
+                                            enableInteractiveSelection: true,
                                             validator: _model
                                                 .txtRefrenciaTextControllerValidator
                                                 .asValidator(context),
@@ -3055,7 +3055,7 @@ class _EditarCidadaoWidgetState extends State<EditarCidadaoWidget> {
                                         ),
                                     cursorColor: FlutterFlowTheme.of(context)
                                         .primaryText,
-                                    enableInteractiveSelection: false,
+                                    enableInteractiveSelection: true,
                                     validator: _model
                                         .txtPerfilTextControllerValidator
                                         .asValidator(context),

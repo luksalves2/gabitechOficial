@@ -145,45 +145,6 @@ class _EditarTarefaWidgetState extends State<EditarTarefaWidget> {
                       ],
                     ),
                   ),
-                  if (containerTarefasRow?.status != 'finalizado')
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 8.0, 0.0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'lr8ptd5f' /* Tarefa concluída com sucesso */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  font: GoogleFonts.montserrat(
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                                  letterSpacing: 0.0,
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .fontStyle,
-                                ),
-                          ),
-                        ),
-                        Icon(
-                          Icons.check_circle,
-                          color: Color(0xFF00D63A),
-                          size: 20.0,
-                        ),
-                      ],
-                    ),
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -240,6 +201,8 @@ class _EditarTarefaWidgetState extends State<EditarTarefaWidget> {
                               ),
                               autofocus: false,
                               enabled: true,
+                              readOnly:
+                                  containerTarefasRow?.status == 'finalizado',
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: false,
@@ -338,7 +301,7 @@ class _EditarTarefaWidgetState extends State<EditarTarefaWidget> {
                                   ),
                               cursorColor:
                                   FlutterFlowTheme.of(context).primaryText,
-                              enableInteractiveSelection: false,
+                              enableInteractiveSelection: true,
                               validator: _model.txtTituloTextControllerValidator
                                   .asValidator(context),
                             ),
@@ -350,133 +313,173 @@ class _EditarTarefaWidgetState extends State<EditarTarefaWidget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Row(
+                    child: FutureBuilder<List<CategoriasTarefasRow>>(
+                      future: CategoriasTarefasTable().querySingleRow(
+                        queryFn: (q) => q.eqOrNull(
+                          'id',
+                          containerTarefasRow?.categoria,
+                        ),
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+                        List<CategoriasTarefasRow>
+                            columnCategoriasTarefasRowList = snapshot.data!;
+
+                        final columnCategoriasTarefasRow =
+                            columnCategoriasTarefasRowList.isNotEmpty
+                                ? columnCategoriasTarefasRowList.first
+                                : null;
+
+                        return Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Expanded(
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'xqn2lwv1' /* Categoria */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.montserrat(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'xqn2lwv1' /* Categoria */,
                                     ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.montserrat(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          fontSize: 16.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 12.0, 0.0, 0.0),
+                              child: FutureBuilder<List<CategoriasTarefasRow>>(
+                                future: CategoriasTarefasTable().queryRows(
+                                  queryFn: (q) => q.eqOrNull(
+                                    'gabinete',
+                                    containerTarefasRow?.gabinete,
+                                  ),
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<CategoriasTarefasRow>
+                                      dropCategoriaCategoriasTarefasRowList =
+                                      snapshot.data!;
+
+                                  return FlutterFlowDropDown<int>(
+                                    controller:
+                                        _model.dropCategoriaValueController ??=
+                                            FormFieldController<int>(null),
+                                    options: List<int>.from(
+                                        dropCategoriaCategoriasTarefasRowList
+                                            .map((e) => e.id)
+                                            .toList()),
+                                    optionLabels:
+                                        dropCategoriaCategoriasTarefasRowList
+                                            .map((e) => e.nome)
+                                            .withoutNulls
+                                            .toList(),
+                                    onChanged: (val) => safeSetState(
+                                        () => _model.dropCategoriaValue = val),
+                                    width: double.infinity,
+                                    height: 40.0,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.montserrat(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                    hintText: columnCategoriasTarefasRow?.nome,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
+                                    ),
+                                    fillColor: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    elevation: 2.0,
+                                    borderColor:
+                                        FlutterFlowTheme.of(context).alternate,
+                                    borderWidth: 0.0,
+                                    borderRadius: 8.0,
+                                    margin: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 12.0, 0.0),
+                                    hidesUnderline: true,
+                                    isOverButton: false,
+                                    isSearchable: false,
+                                    isMultiSelect: false,
+                                  );
+                                },
                               ),
                             ),
                           ],
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 12.0, 0.0, 0.0),
-                          child: FutureBuilder<List<CategoriasTarefasRow>>(
-                            future: CategoriasTarefasTable().queryRows(
-                              queryFn: (q) => q.eqOrNull(
-                                'gabinete',
-                                containerTarefasRow?.gabinete,
-                              ),
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<CategoriasTarefasRow>
-                                  dropCategoriaCategoriasTarefasRowList =
-                                  snapshot.data!;
-
-                              return FlutterFlowDropDown<int>(
-                                controller:
-                                    _model.dropCategoriaValueController ??=
-                                        FormFieldController<int>(null),
-                                options: List<int>.from(
-                                    dropCategoriaCategoriasTarefasRowList
-                                        .map((e) => e.id)
-                                        .toList()),
-                                optionLabels:
-                                    dropCategoriaCategoriasTarefasRowList
-                                        .map((e) => e.nome)
-                                        .withoutNulls
-                                        .toList(),
-                                onChanged: (val) => safeSetState(
-                                    () => _model.dropCategoriaValue = val),
-                                width: double.infinity,
-                                height: 40.0,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.montserrat(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                hintText: FFLocalizations.of(context).getText(
-                                  'urw1h6ix' /* Selecione */,
-                                ),
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2.0,
-                                borderColor:
-                                    FlutterFlowTheme.of(context).alternate,
-                                borderWidth: 0.0,
-                                borderRadius: 8.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                hidesUnderline: true,
-                                isOverButton: false,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              );
-                            },
-                          ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
                   Padding(
@@ -535,6 +538,8 @@ class _EditarTarefaWidgetState extends State<EditarTarefaWidget> {
                               ),
                               autofocus: false,
                               enabled: true,
+                              readOnly:
+                                  containerTarefasRow?.status == 'finalizado',
                               obscureText: false,
                               decoration: InputDecoration(
                                 isDense: false,

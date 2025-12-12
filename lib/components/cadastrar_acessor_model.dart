@@ -31,7 +31,6 @@ class CadastrarAcessorModel extends FlutterFlowModel<CadastrarAcessorWidget> {
   // State field(s) for txtCargo widget.
   FocusNode? txtCargoFocusNode;
   TextEditingController? txtCargoTextController;
-  late MaskTextInputFormatter txtCargoMask;
   String? Function(BuildContext, String?)? txtCargoTextControllerValidator;
   // State field(s) for txtSenha widget.
   FocusNode? txtSenhaFocusNode;

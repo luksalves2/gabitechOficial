@@ -543,6 +543,8 @@ class _MensagensWidgetState extends State<MensagensWidget> {
                                                                 );
                                                                 _model.conversaSelecionada =
                                                                     'selecionado';
+                                                                _model.menuChat =
+                                                                    'fechado';
                                                                 safeSetState(
                                                                     () {});
                                                                 FFAppState()
@@ -1482,6 +1484,8 @@ class _MensagensWidgetState extends State<MensagensWidget> {
                                                                                       onTap: () async {
                                                                                         _model.menuChat = 'aberto';
                                                                                         safeSetState(() {});
+                                                                                        safeSetState(() => _model.requestCompleter1 = null);
+                                                                                        await _model.waitForRequestCompleted1();
                                                                                       },
                                                                                       child: Icon(
                                                                                         Icons.last_page,
@@ -3430,6 +3434,8 @@ class _MensagensWidgetState extends State<MensagensWidget> {
                                                                                       onTap: () async {
                                                                                         _model.menuChat = 'fechado';
                                                                                         safeSetState(() {});
+                                                                                        safeSetState(() => _model.requestCompleter1 = null);
+                                                                                        await _model.waitForRequestCompleted1();
                                                                                       },
                                                                                       child: Icon(
                                                                                         Icons.first_page_sharp,

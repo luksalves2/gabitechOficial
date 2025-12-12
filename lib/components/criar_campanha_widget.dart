@@ -374,7 +374,7 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                           ),
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtTituloTextControllerValidator
                                           .asValidator(context),
@@ -560,7 +560,7 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                       maxLines: 5,
                                       cursorColor: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      enableInteractiveSelection: false,
+                                      enableInteractiveSelection: true,
                                       validator: _model
                                           .txtMensagemTextControllerValidator
                                           .asValidator(context),
@@ -2615,41 +2615,62 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 12.0, 0.0),
-                                  child: Container(
-                                    width: 130.0,
-                                    height: 45.0,
-                                    decoration: BoxDecoration(
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurRadius: 12.0,
-                                          color: Color(0x11000000),
-                                          offset: Offset(
-                                            0.0,
-                                            5.0,
-                                          ),
-                                        )
-                                      ],
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      border: Border.all(
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      width: 130.0,
+                                      height: 45.0,
+                                      decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
-                                            .alternate,
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 12.0,
+                                            color: Color(0x11000000),
+                                            offset: Offset(
+                                              0.0,
+                                              5.0,
+                                            ),
+                                          )
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                        ),
                                       ),
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'mq1k3c8i' /* Cancelar */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                font: GoogleFonts.montserrat(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'mq1k3c8i' /* Cancelar */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.montserrat(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -2657,19 +2678,9 @@ class _CriarCampanhaWidgetState extends State<CriarCampanhaWidget> {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                                fontStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .fontStyle,
-                                              ),
-                                        ),
-                                      ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

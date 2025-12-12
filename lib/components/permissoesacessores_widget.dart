@@ -49,7 +49,6 @@ class _PermissoesacessoresWidgetState extends State<PermissoesacessoresWidget> {
 
     _model.txtCargoFocusNode ??= FocusNode();
 
-    _model.txtCargoMask = MaskTextInputFormatter(mask: '(##) # ####-####');
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -374,7 +373,7 @@ class _PermissoesacessoresWidgetState extends State<PermissoesacessoresWidget> {
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          enableInteractiveSelection: false,
+                                          enableInteractiveSelection: true,
                                           validator: _model
                                               .txtNomeTextControllerValidator
                                               .asValidator(context),
@@ -589,7 +588,7 @@ class _PermissoesacessoresWidgetState extends State<PermissoesacessoresWidget> {
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          enableInteractiveSelection: false,
+                                          enableInteractiveSelection: true,
                                           validator: _model
                                               .txtTelefoneTextControllerValidator
                                               .asValidator(context),
@@ -801,17 +800,13 @@ class _PermissoesacessoresWidgetState extends State<PermissoesacessoresWidget> {
                                                         .bodyMedium
                                                         .fontStyle,
                                               ),
-                                          keyboardType: TextInputType.number,
                                           cursorColor:
                                               FlutterFlowTheme.of(context)
                                                   .primaryText,
-                                          enableInteractiveSelection: false,
+                                          enableInteractiveSelection: true,
                                           validator: _model
                                               .txtCargoTextControllerValidator
                                               .asValidator(context),
-                                          inputFormatters: [
-                                            _model.txtCargoMask
-                                          ],
                                         ),
                                       ),
                                     ),

@@ -319,7 +319,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                     ),
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                enableInteractiveSelection: false,
+                                enableInteractiveSelection: true,
                                 validator: _model.txtNomeTextControllerValidator
                                     .asValidator(context),
                               ),
@@ -485,7 +485,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                     ),
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                enableInteractiveSelection: false,
+                                enableInteractiveSelection: true,
                                 validator: _model
                                     .txtEmailTextControllerValidator
                                     .asValidator(context),
@@ -653,7 +653,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                 keyboardType: TextInputType.number,
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                enableInteractiveSelection: false,
+                                enableInteractiveSelection: true,
                                 validator: _model
                                     .txtTelefoneTextControllerValidator
                                     .asValidator(context),
@@ -822,7 +822,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                     ),
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                enableInteractiveSelection: false,
+                                enableInteractiveSelection: true,
                                 validator: _model
                                     .txtDataNascimentoTextControllerValidator
                                     .asValidator(context),
@@ -1038,7 +1038,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                       ),
                                   cursorColor:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  enableInteractiveSelection: false,
+                                  enableInteractiveSelection: true,
                                   validator: _model
                                       .txtCepTextControllerValidator
                                       .asValidator(context),
@@ -1244,7 +1244,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtRuaTextControllerValidator
                                             .asValidator(context),
@@ -1445,7 +1445,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtBairroTextControllerValidator
                                             .asValidator(context),
@@ -1655,7 +1655,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtCidadeTextControllerValidator
                                             .asValidator(context),
@@ -1856,7 +1856,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtEstadoTextControllerValidator
                                             .asValidator(context),
@@ -2057,7 +2057,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtNumeroTextControllerValidator
                                             .asValidator(context),
@@ -2268,7 +2268,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtComplementoTextControllerValidator
                                             .asValidator(context),
@@ -2371,7 +2371,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                               ),
                                           hintText: FFLocalizations.of(context)
                                               .getText(
-                                            '4l42z1p4' /* ex: Mercaidnho */,
+                                            '4l42z1p4' /* ex: Mercadinho */,
                                           ),
                                           hintStyle: FlutterFlowTheme.of(
                                                   context)
@@ -2469,7 +2469,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                         cursorColor:
                                             FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                        enableInteractiveSelection: false,
+                                        enableInteractiveSelection: true,
                                         validator: _model
                                             .txtRefrenciaTextControllerValidator
                                             .asValidator(context),
@@ -2747,7 +2747,7 @@ class _CadastroCidadaoWidgetState extends State<CadastroCidadaoWidget> {
                                     ),
                                 cursorColor:
                                     FlutterFlowTheme.of(context).primaryText,
-                                enableInteractiveSelection: false,
+                                enableInteractiveSelection: true,
                                 validator: _model
                                     .txtPerfilTextControllerValidator
                                     .asValidator(context),

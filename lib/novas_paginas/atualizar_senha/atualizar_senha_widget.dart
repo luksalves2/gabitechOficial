@@ -257,7 +257,7 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                                         .fontStyle,
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model.txtNovaSenhaTextControllerValidator
                               .asValidator(context),
                         ),
@@ -414,7 +414,7 @@ class _AtualizarSenhaWidgetState extends State<AtualizarSenhaWidget> {
                                         .fontStyle,
                                   ),
                           cursorColor: FlutterFlowTheme.of(context).primaryText,
-                          enableInteractiveSelection: false,
+                          enableInteractiveSelection: true,
                           validator: _model
                               .txtConfirmarSenhaTextControllerValidator
                               .asValidator(context),
