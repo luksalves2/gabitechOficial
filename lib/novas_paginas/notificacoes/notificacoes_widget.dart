@@ -8,7 +8,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notificacoes_model.dart';
@@ -34,15 +33,6 @@ class _NotificacoesWidgetState extends State<NotificacoesWidget> {
     super.initState();
     _model = createModel(context, () => NotificacoesModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _model.limite = 20;
-      _model.menu = 'cadastrados';
-      safeSetState(() {});
-      FFAppState().menu = 'cidadaos';
-      safeSetState(() {});
-    });
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -55,8 +45,6 @@ class _NotificacoesWidgetState extends State<NotificacoesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'notificacoes',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),

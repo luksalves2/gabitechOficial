@@ -2574,7 +2574,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'te': '',
       'ur': '',
     },
-    'l57h7es4': {
+    'p47iq3yz': {
       'en': 'Cidadãos',
       'hi': '',
       'ml': '',
@@ -5453,6 +5453,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'a6njh7ic': {
       'en': 'Detalhes...',
+      'hi': '',
+      'ml': '',
+      'or': '',
+      'ta': '',
+      'te': '',
+      'ur': '',
+    },
+    'py6n4jlr': {
+      'en': 'Anexo (opcional)',
+      'hi': '',
+      'ml': '',
+      'or': '',
+      'ta': '',
+      'te': '',
+      'ur': '',
+    },
+    'jls3yfni': {
+      'en': 'Arquivo',
       'hi': '',
       'ml': '',
       'or': '',

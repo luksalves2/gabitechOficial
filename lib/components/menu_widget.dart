@@ -946,140 +946,108 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                               () => _model.mouseRegionHovered5 = false);
                         }),
                       ),
-                    if (containerUsuariosRow?.cidadaos ?? true)
-                      MouseRegion(
-                        opaque: false,
-                        cursor: MouseCursor.defer ?? MouseCursor.defer,
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              20.0, 20.0, 20.0, 0.0),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              FFAppState().menu = 'cidadaos';
-                              safeSetState(() {});
+                    MouseRegion(
+                      opaque: false,
+                      cursor: MouseCursor.defer ?? MouseCursor.defer,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            20.0, 20.0, 20.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            FFAppState().menu = 'cidadaos';
+                            safeSetState(() {});
 
-                              context.pushNamed(
-                                CidadoesWidget.routeName,
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 0),
+                            context.pushNamed(
+                              CidadoesWidget.routeName,
+                              extra: <String, dynamic>{
+                                kTransitionInfoKey: TransitionInfo(
+                                  hasTransition: true,
+                                  transitionType: PageTransitionType.fade,
+                                  duration: Duration(milliseconds: 0),
+                                ),
+                              },
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 12.0,
+                                  color: FFAppState().menu == 'cidadaos'
+                                      ? Color(0x6E3B82F6)
+                                      : Colors.white,
+                                  offset: Offset(
+                                    0.0,
+                                    5.0,
                                   ),
-                                },
-                              );
-                            },
-                            child: Container(
-                              width: double.infinity,
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 12.0,
-                                    color: FFAppState().menu == 'cidadaos'
-                                        ? Color(0x6E3B82F6)
+                                )
+                              ],
+                              gradient: LinearGradient(
+                                colors: [
+                                  valueOrDefault<Color>(
+                                    FFAppState().menu == 'cidadaos'
+                                        ? FlutterFlowTheme.of(context).primary
                                         : Colors.white,
-                                    offset: Offset(
-                                      0.0,
-                                      5.0,
-                                    ),
+                                    Colors.white,
+                                  ),
+                                  valueOrDefault<Color>(
+                                    FFAppState().menu == 'cidadaos'
+                                        ? FlutterFlowTheme.of(context).secondary
+                                        : Colors.white,
+                                    Colors.white,
                                   )
                                 ],
-                                gradient: LinearGradient(
-                                  colors: [
-                                    valueOrDefault<Color>(
-                                      FFAppState().menu == 'cidadaos'
-                                          ? FlutterFlowTheme.of(context).primary
-                                          : Colors.white,
-                                      Colors.white,
-                                    ),
-                                    valueOrDefault<Color>(
-                                      FFAppState().menu == 'cidadaos'
-                                          ? FlutterFlowTheme.of(context)
-                                              .secondary
-                                          : Colors.white,
-                                      Colors.white,
-                                    )
-                                  ],
-                                  stops: [0.0, 1.0],
-                                  begin: AlignmentDirectional(0.94, -1.0),
-                                  end: AlignmentDirectional(-0.94, 1.0),
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
+                                stops: [0.0, 1.0],
+                                begin: AlignmentDirectional(0.94, -1.0),
+                                end: AlignmentDirectional(-0.94, 1.0),
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    FaIcon(
-                                      FontAwesomeIcons.users,
-                                      color: valueOrDefault<Color>(
-                                        () {
-                                          if (_model.mouseRegionHovered6!) {
-                                            return FlutterFlowTheme.of(context)
-                                                .primary;
-                                          } else if (FFAppState().menu ==
-                                              'cidadaos') {
-                                            return Colors.white;
-                                          } else {
-                                            return FlutterFlowTheme.of(context)
-                                                .secondaryText;
-                                          }
-                                        }(),
-                                        FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                      ),
-                                      size: 20.0,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  10.0, 0.0, 10.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.users,
+                                    color: valueOrDefault<Color>(
+                                      () {
+                                        if (_model.mouseRegionHovered6!) {
+                                          return FlutterFlowTheme.of(context)
+                                              .primary;
+                                        } else if (FFAppState().menu ==
+                                            'cidadaos') {
+                                          return Colors.white;
+                                        } else {
+                                          return FlutterFlowTheme.of(context)
+                                              .secondaryText;
+                                        }
+                                      }(),
+                                      FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                     ),
-                                    if (_model.abrirFechar == 'aberto')
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  8.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'l57h7es4' /* Cidadãos */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.montserrat(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  color: valueOrDefault<Color>(
-                                                    () {
-                                                      if (_model
-                                                          .mouseRegionHovered6!) {
-                                                        return FlutterFlowTheme
-                                                                .of(context)
-                                                            .primary;
-                                                      } else if (FFAppState()
-                                                              .menu ==
-                                                          'cidadaos') {
-                                                        return Colors.white;
-                                                      } else {
-                                                        return FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryText;
-                                                      }
-                                                    }(),
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                  ),
-                                                  fontSize: 15.0,
-                                                  letterSpacing: 0.0,
+                                    size: 18.0,
+                                  ),
+                                  if (_model.abrirFechar == 'aberto')
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          FFLocalizations.of(context).getText(
+                                            'p47iq3yz' /* Cidadãos */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.montserrat(
                                                   fontWeight: FontWeight.w600,
                                                   fontStyle:
                                                       FlutterFlowTheme.of(
@@ -1087,23 +1055,50 @@ class _MenuWidgetState extends State<MenuWidget> with TickerProviderStateMixin {
                                                           .bodyMedium
                                                           .fontStyle,
                                                 ),
-                                          ),
+                                                color: valueOrDefault<Color>(
+                                                  () {
+                                                    if (_model
+                                                        .mouseRegionHovered6!) {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .primary;
+                                                    } else if (FFAppState()
+                                                            .menu ==
+                                                        'cidadaos') {
+                                                      return Colors.white;
+                                                    } else {
+                                                      return FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryText;
+                                                    }
+                                                  }(),
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                                ),
+                                                fontSize: 15.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                         ),
                                       ),
-                                  ],
-                                ),
+                                    ),
+                                ],
                               ),
                             ),
                           ),
                         ),
-                        onEnter: ((event) async {
-                          safeSetState(() => _model.mouseRegionHovered6 = true);
-                        }),
-                        onExit: ((event) async {
-                          safeSetState(
-                              () => _model.mouseRegionHovered6 = false);
-                        }),
                       ),
+                      onEnter: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered6 = true);
+                      }),
+                      onExit: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered6 = false);
+                      }),
+                    ),
                     if (containerUsuariosRow?.acessores ?? true)
                       MouseRegion(
                         opaque: false,

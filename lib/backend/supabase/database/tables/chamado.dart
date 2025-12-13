@@ -31,4 +31,10 @@ class ChamadoRow extends SupabaseDataRow {
 
   String? get status => getField<String>('status');
   set status(String? value) => setField<String>('status', value);
+
+  String? get arquivo => getField<String>('arquivo');
+  set arquivo(String? value) => setField<String>('arquivo', value);
+
+  int? get gabinete => getField<int>('gabinete');
+  set gabinete(int? value) => setField<int>('gabinete', value);
 }
