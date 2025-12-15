@@ -1449,6 +1449,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'te': '',
       'ur': '',
     },
+    'u1pd4zul': {
+      'en':
+          '⚠️ Uso do WhatsApp\n\n🔁 Evite envios excessivos\nDisparos em massa ou repetitivos podem gerar bloqueio da conta pelo WhatsApp.\n\n🚫 Isenção de responsabilidade\nA Gabitech LTDA não se responsabiliza por bloqueios ou suspensões decorrentes de uso inadequado.\n\n🔐 Consentimento obrigatório\nEnvie mensagens apenas para contatos que autorizaram o recebimento.\n\n🧠 Uso consciente\nEvite SPAM e mantenha interações reais e relevantes.\n\n👤 Responsabilidade do usuário\nTodo o conteúdo enviado é de responsabilidade do usuário conectado.\n\n📵 Limitações do sistema\nSuporte apenas a Texto, Áudio, Imagem, Documento e Vídeo.\nNão há suporte para figurinhas, contatos ou localização.\n\n🏷️ Organização\nUse tags para filtrar e organizar conversas por assessor.',
+      'hi': '',
+      'ml': '',
+      'or': '',
+      'ta': '',
+      'te': '',
+      'ur': '',
+    },
     'qfwmkhm9': {
       'en': 'Home',
       'hi': '',
@@ -5519,6 +5529,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'tb80pcls': {
       'en': 'Pendente',
+      'hi': '',
+      'ml': '',
+      'or': '',
+      'ta': '',
+      'te': '',
+      'ur': '',
+    },
+  },
+  // modal_avancar_andamentoCopy
+  {
+    'bkurtpxg': {
+      'en':
+          '📱 Como conectar:\n\nAbra o WhatsApp no seu celular\n\nToque em Aparelhos conectados\n\nSelecione Conectar um aparelho\n\nAponte a câmera para o QR Code\nexibido na tela',
       'hi': '',
       'ml': '',
       'or': '',
