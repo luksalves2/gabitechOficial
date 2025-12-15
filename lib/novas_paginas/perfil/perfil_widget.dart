@@ -2037,38 +2037,64 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                     ),
                                                   ],
                                                 ),
-                                                Container(
-                                                  width: 900.0,
-                                                  height: 300.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  elevation: 4.0,
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             12.0),
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(30.0,
-                                                                20.0, 0.0, 0.0),
-                                                    child: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        'u1pd4zul' /* ⚠️ Uso do WhatsApp
+                                                  child: Container(
+                                                    width: 900.0,
+                                                    height: 342.19,
+                                                    decoration: BoxDecoration(
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                      border: Border.all(
+                                                        color:
+                                                            Color(0xFFB01111),
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  30.0,
+                                                                  20.0,
+                                                                  0.0,
+                                                                  10.0),
+                                                      child: Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          'u1pd4zul' /* ⚠️ Uso do WhatsApp
 
 🔁 Evite e... */
-                                                        ,
-                                                      ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                font: GoogleFonts
-                                                                    .montserrat(
+                                                          ,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .montserrat(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -2078,17 +2104,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                                       .bodyMedium
                                                                       .fontStyle,
                                                                 ),
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontWeight,
-                                                                fontStyle: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .fontStyle,
-                                                              ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

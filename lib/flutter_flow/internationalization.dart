@@ -1451,7 +1451,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'u1pd4zul': {
       'en':
-          '⚠️ Uso do WhatsApp\n\n🔁 Evite envios excessivos\nDisparos em massa ou repetitivos podem gerar bloqueio da conta pelo WhatsApp.\n\n🚫 Isenção de responsabilidade\nA Gabitech LTDA não se responsabiliza por bloqueios ou suspensões decorrentes de uso inadequado.\n\n🔐 Consentimento obrigatório\nEnvie mensagens apenas para contatos que autorizaram o recebimento.\n\n🧠 Uso consciente\nEvite SPAM e mantenha interações reais e relevantes.\n\n👤 Responsabilidade do usuário\nTodo o conteúdo enviado é de responsabilidade do usuário conectado.\n\n📵 Limitações do sistema\nSuporte apenas a Texto, Áudio, Imagem, Documento e Vídeo.\nNão há suporte para figurinhas, contatos ou localização.\n\n🏷️ Organização\nUse tags para filtrar e organizar conversas por assessor.',
+          '⚠️ Uso do WhatsApp\n\n🔁 Evite envios excessivos\nDisparos em massa ou repetitivos podem gerar bloqueio da conta pelo WhatsApp.\n🚫 Isenção de responsabilidade\nA Gabitech LTDA não se responsabiliza por bloqueios ou suspensões decorrentes de \nuso inadequado.\n🔐 Consentimento obrigatório\nEnvie mensagens apenas para contatos que autorizaram o recebimento.\n🧠 Uso consciente\nEvite SPAM e mantenha interações reais e relevantes.\n👤 Responsabilidade do usuário\nTodo o conteúdo enviado é de responsabilidade do usuário conectado.\n📵 Limitações do sistema\nSuporte apenas a Texto, Áudio, Imagem, Documento e Vídeo.\nNão há suporte para figurinhas, contatos ou localização.\n🏷️ Organização\nUse tags para filtrar e organizar conversas por assessor.',
       'hi': '',
       'ml': '',
       'or': '',
