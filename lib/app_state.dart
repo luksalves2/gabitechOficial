@@ -1140,6 +1140,12 @@ class FFAppState extends ChangeNotifier {
   set refreshConversa(String value) {
     _refreshConversa = value;
   }
+
+  String _statusConexaoWhatsapp = '';
+  String get statusConexaoWhatsapp => _statusConexaoWhatsapp;
+  set statusConexaoWhatsapp(String value) {
+    _statusConexaoWhatsapp = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

@@ -1895,6 +1895,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                                                 hoverColor: Colors.transparent,
                                                                                 highlightColor: Colors.transparent,
                                                                                 onTap: () async {
+                                                                                  FFAppState().statusConexaoWhatsapp = 'pendente';
+                                                                                  safeSetState(() {});
                                                                                   await showModalBottomSheet(
                                                                                     isScrollControlled: true,
                                                                                     backgroundColor: Colors.transparent,
@@ -1908,7 +1910,7 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                                                         child: Padding(
                                                                                           padding: MediaQuery.viewInsetsOf(context),
                                                                                           child: ConectarWhatsappWidget(
-                                                                                            idGabinete: 0,
+                                                                                            idGabinete: containerGabineteRow!.id,
                                                                                             atualizar: () async {
                                                                                               safeSetState(() => _model.requestCompleter3 = null);
                                                                                               await _model.waitForRequestCompleted3();

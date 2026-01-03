@@ -665,6 +665,19 @@ class _ConectarWhatsappWidgetState extends State<ConectarWhatsappWidget> {
                                       'connected') {
                                     _model.status = null;
                                     safeSetState(() {});
+                                    await UazapiGroup
+                                        .conectarWebhookInstanciaCall
+                                        .call(
+                                      token: _model.token,
+                                      webhook:
+                                          'https://gabitech-n8n.gabitechnology.cloud/webhook/54470dd5-d383-4ca6-b93a-f7a26d4bdf9a',
+                                    );
+
+                                    await Future.delayed(
+                                      Duration(
+                                        milliseconds: 1000,
+                                      ),
+                                    );
                                     await GabineteTable().update(
                                       data: {
                                         'token': _model.token,

@@ -765,6 +765,8 @@ class UazapiGroup {
       MensagensEmMassaDocumentoCall();
   static ListarCampanhasCall listarCampanhasCall = ListarCampanhasCall();
   static DeletarCampanhaCall deletarCampanhaCall = DeletarCampanhaCall();
+  static ConectarWebhookInstanciaCall conectarWebhookInstanciaCall =
+      ConectarWebhookInstanciaCall();
 }
 
 class CriarInstanciaCall {
@@ -1630,6 +1632,47 @@ class DeletarCampanhaCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Deletar Campanha',
       apiUrl: '${baseUrl}/sender/edit',
+      callType: ApiCallType.POST,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'admintoken': 'FNTW4J6mq5Fiep7wJO4OY1QbXSyTBIOj9HXp3A40DK5caRUKuY',
+        'token': '${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ConectarWebhookInstanciaCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+    String? webhook = '',
+  }) async {
+    final baseUrl = UazapiGroup.getBaseUrl();
+
+    final ffApiRequestBody = '''
+{
+  "enabled": true,
+  "url": "${escapeStringForJson(webhook)}",
+  "events": [
+    "messages"
+  ],
+  "excludeMessages": [
+    "isGroupYes"
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Conectar Webhook Instancia',
+      apiUrl: '${baseUrl}/webhook',
       callType: ApiCallType.POST,
       headers: {
         'Accept': 'application/json',
